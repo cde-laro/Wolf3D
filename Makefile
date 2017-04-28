@@ -15,9 +15,9 @@ SRC_FT = main \
 		 extract \
 		 img_draw \
 		 minimap \
-		 test \
+		 wolf \
 		 hook \
-		 move 
+		 move
 
 OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
 	SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)
