@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 01:13:21 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 01:42:40 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		game_loop(t_env *e)
 {
+	int static		frames = 0;
 	if (e->k->right)
 		rotate(e, -1);
 	if (e->k->left)
@@ -24,13 +25,18 @@ int		game_loop(t_env *e)
 	if (e->k->down)
 		move(e, -1);
 	e->p->speed = (e->k->sprint ? 0.6 : 0.3);
+	printf("Frame : %d\n", frames);
 	printf("pos :   [%f][%f]\n", e->p->pos.x, e->p->pos.y);
 	printf("dir :   [%f][%f]\n", e->p->dir.x, e->p->dir.y);
 	printf("plane : [%f][%f]\n", e->p->plane.x, e->p->plane.y);
 	ft_putchar('\n');
 	usleep(1000000 / MAX_FPS);
-	draw_frame(e);
-	reset_img(e);
+	if (e->k->up == 1 || e->k->down == 1 || e->k->left == 1 || e->k->right == 1)
+	{
+		frames++;
+		draw_frame(e);
+		reset_img(e);
+	}
 	return (0);
 }
 
