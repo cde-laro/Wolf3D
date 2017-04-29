@@ -6,36 +6,66 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/28 19:23:17 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 01:13:21 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <stdio.h>
 
-int		key_funct(int k, t_env *e)
+int		game_loop(t_env *e)
 {
-	if (k == KEY_RIGHT || k == KEY_D)
+	if (e->k->right)
 		rotate(e, -1);
-	else if (k == KEY_LEFT || k == KEY_A)
+	if (e->k->left)
 		rotate(e, 1);
-	else if (k == KEY_UP || k == KEY_W)
+	if (e->k->up)
 		move(e, 1);
-	else if (k == KEY_DOWN || k == KEY_S)
+	if (e->k->down)
 		move(e, -1);
-	else if (k == KEY_Q)
-		move(e, 3);
-	else if (k == KEY_E)
-		move(e, 4);
-	else if (k == KEY_SHIFT_LEFT)
-		e->p->speed = (e->p->speed == 0.3 ? 0.6 : 0.3);
-	else if (k == KEY_ESCAPE)
-		exit(0);
+	e->p->speed = (e->k->sprint ? 0.6 : 0.3);
 	printf("pos :   [%f][%f]\n", e->p->pos.x, e->p->pos.y);
 	printf("dir :   [%f][%f]\n", e->p->dir.x, e->p->dir.y);
 	printf("plane : [%f][%f]\n", e->p->plane.x, e->p->plane.y);
 	ft_putchar('\n');
+	usleep(1000000 / MAX_FPS);
 	draw_frame(e);
 	reset_img(e);
+	return (0);
+}
+
+int		key_press(int k, t_env *e)
+{
+	if (k == KEY_RIGHT || k == KEY_D)
+		e->k->right = 1;
+	else if (k == KEY_LEFT || k == KEY_A)
+		e->k->left = 1;
+	else if (k == KEY_UP || k == KEY_W)
+		e->k->up = 1;
+	else if (k == KEY_DOWN || k == KEY_S)
+		e->k->down = 1;
+	else if (k == KEY_SHIFT_LEFT)
+		e->k->sprint = 1;
+	else if (k == KEY_CTRL_LEFT)
+		e->k->sneak = 1;
+	else if (k == KEY_ESCAPE)
+		exit(0);
+	return (0);
+}
+
+int		key_release(int k, t_env *e)
+{
+	if (k == KEY_RIGHT || k == KEY_D)
+		e->k->right = 0;
+	else if (k == KEY_LEFT || k == KEY_A)
+		e->k->left = 0;
+	else if (k == KEY_UP || k == KEY_W)
+		e->k->up = 0;
+	else if (k == KEY_DOWN || k == KEY_S)
+		e->k->down = 0;
+	else if (k == KEY_SHIFT_LEFT)
+		e->k->sprint = 0;
+	else if (k == KEY_CTRL_LEFT)
+		e->k->sneak = 0;
 	return (0);
 }

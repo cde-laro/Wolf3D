@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/28 19:14:27 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 01:13:22 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # define BUFF_SIZE 424242
 # define PI M_PI
 # define RAD(x) (PI * x / 180)
-# define WIN_X 720
-# define WIN_Y 480
+# define WIN_X 1080
+# define WIN_Y 720
+# define MAX_FPS 60
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -40,20 +41,7 @@ typedef struct	s_intp
 	int			x;
 	int			y;
 }				t_intp;
-/*
-typedef struct	s_player
-{
-	t_point		pos;
-	double		speed;
-	double		r_s;
-	double		angle;
-	t_point		dir;
-	t_point		delta;
-	t_point		step;
-	t_point		side;
-	t_point		map;
-}				t_player;
-*/
+
 typedef struct	s_map
 {
 	size_t		maxx;
@@ -69,6 +57,16 @@ typedef struct	s_img
 	int			bpp;
 	int			end;
 }				t_img;
+
+typedef struct	s_keys
+{
+	int			up;
+	int			down;
+	int			left;
+	int			right;
+	int			sprint;
+	int			sneak;
+}				t_keys;
 
 typedef struct	s_player
 {
@@ -101,12 +99,15 @@ typedef struct	s_env
 	int			drawed;
 	t_map		*map;
 	t_player	*p;
+	t_keys		*k;
 }				t_env;
 
 char			*ft_strjoin_free(char *s1, char *s2);
 int				check_char(char *str, char *filename);
 t_map			*parse(char *path);
 int				key_funct(int k, t_env *e);
+int				key_press(int k, t_env *e);
+int				key_release(int k, t_env *e);
 void			init(t_env *e);
 void			draw_line(t_env *e, t_intp a, t_intp b, int z);
 void			start(t_env *e);
@@ -117,5 +118,7 @@ void			rotate(t_env *e, int dir);
 void			move(t_env *e, int dir);
 void			draw_frame(t_env *e);
 void			reset_img(t_env *e);
+int				game_loop(t_env *e);
+
 
 #endif

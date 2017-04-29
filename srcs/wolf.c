@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/29 22:54:10 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 01:09:09 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 
 void	calc_line_len(t_env *e, int x, int side)
 {
-	e->p->line_h = (int)(WIN_Y / e->p->pwd * 1.5);
+	t_intp		top;
+	t_intp		bottom;
+
+	bottom.x = x;
+	bottom.y = WIN_Y;
+	top.x = x;
+	top.y = 0;
+	e->p->line_h = (int)(WIN_Y / e->p->pwd * 2);
 	e->p->draw_start.x = x;
 	e->p->draw_start.y = -e->p->line_h / 2 + WIN_Y / 2;
 	e->p->draw_start.y = (e->p->draw_start.y < 0 ? 0 : e->p->draw_start.y);
 	e->p->draw_end.x = x;
 	e->p->draw_end.y = e->p->line_h / 2 + WIN_Y / 2;
 	e->p->draw_end.y = (e->p->draw_end.y > WIN_Y ? WIN_Y : e->p->draw_end.y);
+	draw_line(e, top, e->p->draw_start, 0x0087CEEB);
 	draw_line(e, e->p->draw_start, e->p->draw_end, (side == 0 ? 0x000000FF : 0x00FF0000));
+	draw_line(e, e->p->draw_end, bottom, 0x00AFAFAF);
 }
 
 void	find_wall(t_env *e, int hit, int x)

@@ -6,17 +6,28 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/28 16:59:10 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 00:31:32 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+#include <stdio.h>
 
 void		init_img(t_env *e)
 {
 	e->img->ptr_img = mlx_new_image(e->mlx, WIN_X, WIN_Y);
 	e->img->bts = mlx_get_data_addr(e->img->ptr_img, &(e->img->bpp),
 			&(e->img->size_line), &(e->img->end));
+}
+
+void 		init_keys_value(t_env *e)
+{
+	e->k->up = 0;
+	e->k->down = 0;
+	e->k->left = 0;
+	e->k->right = 0;
+	e->k->sprint = 0;
+	e->k->sneak = 0;
 }
 
 void		print_error_code(int code)
@@ -35,6 +46,22 @@ int			red_cross(int key, t_env *e)
 	return (0);
 }
 
+int			test(t_env *e)
+{
+	static int		lel = 0;
+
+	lel++;
+	system("clear");
+	printf("Fonction appellée %d fois", lel);
+	printf("up %d\n", e->k->up);
+	printf("down %d\n", e->k->down);
+	printf("left %d\n", e->k->left);
+	printf("right %d\n", e->k->right);
+	printf("sprint %d\n", e->k->sprint);
+	printf("sneak %d\n", e->k->sneak);
+	return (0);
+}
+
 void		init(t_env *e)
 {
 	if (!(e->mlx = mlx_init()))
@@ -45,7 +72,13 @@ void		init(t_env *e)
 		print_error_code(3);
 	if (!(e->p = (t_player *)malloc(sizeof(t_player))))
 		print_error_code(4);
+	if (!(e->k = (t_keys *)malloc(sizeof(t_keys))))
+		print_error_code(5);
 	init_img(e);
+	init_keys_value(e);
 	mlx_hook(e->win, 17, (1L << 17), red_cross, e);
-	mlx_hook(e->win, 2, 3, key_funct, e);
+	mlx_hook(e->win, 2, (1L << 0), key_press, e);
+	mlx_hook(e->win, 3, (1L << 1), key_release, e);
+	mlx_loop_hook (e->mlx, game_loop, e);
+//	mlx_hook(e->win, 2, 3, key_funct, e);
 }
