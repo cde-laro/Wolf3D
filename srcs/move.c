@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 05:05:54 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/28 19:30:55 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 01:57:11 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	rotate(t_env *e, int dir)
 		cos(e->p->r_s * dir);
 }
 
-void 	move(t_env *e, int dir)
+void	move(t_env *e, int dir)
 {
 	if (!(e->map->data[(int)(e->p->pos.y + (dir * e->p->dir.y * e->p->speed))]
 			[(int)e->p->pos.x]))

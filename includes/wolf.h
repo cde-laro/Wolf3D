@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 01:13:22 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 03:05:49 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define RAD(x) (PI * x / 180)
 # define WIN_X 1080
 # define WIN_Y 720
-# define MAX_FPS 60
+# define DEF_SPEED 0.3
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -119,6 +119,5 @@ void			move(t_env *e, int dir);
 void			draw_frame(t_env *e);
 void			reset_img(t_env *e);
 int				game_loop(t_env *e);
-
 
 #endif

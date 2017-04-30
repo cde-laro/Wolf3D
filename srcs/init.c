@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 00:31:32 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 01:56:40 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		init_img(t_env *e)
 			&(e->img->size_line), &(e->img->end));
 }
 
-void 		init_keys_value(t_env *e)
+void		init_keys_value(t_env *e)
 {
 	e->k->up = 0;
 	e->k->down = 0;
@@ -46,22 +46,6 @@ int			red_cross(int key, t_env *e)
 	return (0);
 }
 
-int			test(t_env *e)
-{
-	static int		lel = 0;
-
-	lel++;
-	system("clear");
-	printf("Fonction appellée %d fois", lel);
-	printf("up %d\n", e->k->up);
-	printf("down %d\n", e->k->down);
-	printf("left %d\n", e->k->left);
-	printf("right %d\n", e->k->right);
-	printf("sprint %d\n", e->k->sprint);
-	printf("sneak %d\n", e->k->sneak);
-	return (0);
-}
-
 void		init(t_env *e)
 {
 	if (!(e->mlx = mlx_init()))
@@ -79,6 +63,5 @@ void		init(t_env *e)
 	mlx_hook(e->win, 17, (1L << 17), red_cross, e);
 	mlx_hook(e->win, 2, (1L << 0), key_press, e);
 	mlx_hook(e->win, 3, (1L << 1), key_release, e);
-	mlx_loop_hook (e->mlx, game_loop, e);
-//	mlx_hook(e->win, 2, 3, key_funct, e);
+	mlx_loop_hook(e->mlx, game_loop, e);
 }

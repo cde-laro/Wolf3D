@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 01:09:09 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 02:26:09 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	calc_line_len(t_env *e, int x, int side)
 	top.y = 0;
 	e->p->line_h = (int)(WIN_Y / e->p->pwd * 2);
 	e->p->draw_start.x = x;
-	e->p->draw_start.y = -e->p->line_h / 2 + WIN_Y / 2;
+	e->p->draw_start.y = (-e->p->line_h / 2 + WIN_Y / 2) - e->k->sneak;
 	e->p->draw_start.y = (e->p->draw_start.y < 0 ? 0 : e->p->draw_start.y);
 	e->p->draw_end.x = x;
-	e->p->draw_end.y = e->p->line_h / 2 + WIN_Y / 2;
+	e->p->draw_end.y = e->p->line_h / 2 + WIN_Y / 2 - e->k->sneak;
 	e->p->draw_end.y = (e->p->draw_end.y > WIN_Y ? WIN_Y : e->p->draw_end.y);
 	draw_line(e, top, e->p->draw_start, 0x0087CEEB);
-	draw_line(e, e->p->draw_start, e->p->draw_end, (side == 0 ? 0x000000FF : 0x00FF0000));
+	draw_line(e, e->p->draw_start, e->p->draw_end,
+		(side == 0 ? 0x000000FF : 0x00FF0000));
 	draw_line(e, e->p->draw_end, bottom, 0x00AFAFAF);
 }
 
@@ -52,19 +53,19 @@ void	find_wall(t_env *e, int hit, int x)
 			e->p->map.y += e->p->step.y;
 			side = 1;
 		}
-
 		hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : hit);
 	}
 	if (side == 0)
-		e->p->pwd = (e->p->map.x - e->p->rayp.x + (1 - e->p->step.x) / 2) / e->p->rayd.x;
+		e->p->pwd = (e->p->map.x - e->p->rayp.x + (1 - e->p->step.x) / 2)
+			/ e->p->rayd.x;
 	else
-		e->p->pwd = (e->p->map.y - e->p->rayp.y + (1 - e->p->step.y) / 2) / e->p->rayd.y;
+		e->p->pwd = (e->p->map.y - e->p->rayp.y + (1 - e->p->step.y) / 2)
+			/ e->p->rayd.y;
 	calc_line_len(e, x, side);
 }
 
 void	draw_column(t_env *e, int x)
 {
-
 	e->p->deltad.x = sqrt(1 + SQ(e->p->rayd.y) / SQ(e->p->rayd.x));
 	e->p->deltad.y = sqrt(1 + SQ(e->p->rayd.x) / SQ(e->p->rayd.y));
 	e->p->step.x = (e->p->rayd.x < 0 ? -1 : 1);
@@ -104,7 +105,7 @@ void	start(t_env *e)
 	if (e->map->data[2][2])
 	{
 		ft_putendl("The case [2][2] must be empty");
-		exit (-1);
+		exit(-1);
 	}
 	e->p->pos.x = 2;
 	e->p->pos.y = 2;
