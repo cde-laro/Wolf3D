@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 03:05:49 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 07:33:25 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define WIN_X 1080
 # define WIN_Y 720
 # define DEF_SPEED 0.3
+# define JUMP_MAX 75
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -41,6 +42,7 @@ typedef struct	s_intp
 	int			x;
 	int			y;
 }				t_intp;
+
 
 typedef struct	s_map
 {
@@ -58,6 +60,12 @@ typedef struct	s_img
 	int			end;
 }				t_img;
 
+typedef struct	s_sky
+{
+	t_img		*img;
+	t_intp		a;
+}				t_sky;
+
 typedef struct	s_keys
 {
 	int			up;
@@ -66,6 +74,10 @@ typedef struct	s_keys
 	int			right;
 	int			sprint;
 	int			sneak;
+	int			jump;
+	int			jump_state;
+	t_intp		dec;
+	int			rotation;
 }				t_keys;
 
 typedef struct	s_player
@@ -88,6 +100,7 @@ typedef struct	s_player
 	int			line_h;
 	t_intp		draw_start;
 	t_intp		draw_end;
+	int			color;
 }				t_player;
 
 typedef struct	s_env
@@ -100,12 +113,13 @@ typedef struct	s_env
 	t_map		*map;
 	t_player	*p;
 	t_keys		*k;
+	t_sky		*s;
 }				t_env;
 
 char			*ft_strjoin_free(char *s1, char *s2);
 int				check_char(char *str, char *filename);
 t_map			*parse(char *path);
-int				key_funct(int k, t_env *e);
+//int				key_funct(int k, t_env *e);
 int				key_press(int k, t_env *e);
 int				key_release(int k, t_env *e);
 void			init(t_env *e);
@@ -119,5 +133,10 @@ void			move(t_env *e, int dir);
 void			draw_frame(t_env *e);
 void			reset_img(t_env *e);
 int				game_loop(t_env *e);
+void			jump_dec(t_env *e);
+int				red_cross(int key, t_env *e);
+void			pix_put_img(t_env *e, int x, int y, int color);
+void			mlx_clr_img(t_env *e);
+void 			reprint(t_env *e);
 
 #endif

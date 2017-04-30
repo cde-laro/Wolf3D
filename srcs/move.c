@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 05:05:54 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 01:57:11 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 07:35:48 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	rotate(t_env *e, int dir)
 		sin(e->p->r_s * dir);
 	e->p->plane.y = oldplane * sin(e->p->r_s * dir) + e->p->plane.y *
 		cos(e->p->r_s * dir);
+	e->k->dec.x -= 30 * dir;
 }
 
 void	move(t_env *e, int dir)

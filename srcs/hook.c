@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 03:06:47 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 07:33:51 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int		game_loop(t_env *e)
 {
+	int static		ticks = 0;
+
 	e->p->speed = (e->k->sprint ? DEF_SPEED * 2 : DEF_SPEED);
 	e->p->speed = (e->k->sneak ? DEF_SPEED / 2 : e->p->speed);
 	if (e->k->right)
@@ -25,16 +27,17 @@ int		game_loop(t_env *e)
 		move(e, 1);
 	if (e->k->down)
 		move(e, -1);
-	if (e->k->up || e->k->down || e->k->left || e->k->right)
-	{
-		ft_putchar('|');
-		draw_frame(e);
-		reset_img(e);
-	}
-	else
-	{
-		usleep(50000);
-	}
+//	if (e->k->up || e->k->down || e->k->left || e->k->right || e->k->jump_state)
+	//{
+		//ft_putchar('|');
+	jump_dec(e);
+	ticks++;
+	if (ticks % 2 == 0 && e->k->rotation)
+		e->k->dec.x++;
+	reprint(e);
+//	}
+//	else
+		//usleep(50000);
 	return (0);
 }
 
@@ -52,12 +55,13 @@ int		key_press(int k, t_env *e)
 		e->k->sprint = 1;
 	else if (k == KEY_Z)
 	{
-		if (!e->k->sneak)
-		{
-			e->k->sneak = 100;
-			draw_frame(e);
-			reset_img(e);
-		}
+		e->k->sneak = 100;
+		reprint(e);
+	}
+	else if (k == KEY_SPACEBAR)
+	{
+		if (e->k->jump_state == 0)
+			e->k->jump_state = 1;
 	}
 	else if (k == KEY_ESCAPE)
 		exit(0);
@@ -77,8 +81,9 @@ int		key_release(int k, t_env *e)
 	else if (k == KEY_SHIFT_LEFT)
 		e->k->sprint = 0;
 	else if (k == KEY_Z)
+	{
 		e->k->sneak = 0;
-	draw_frame(e);
-	reset_img(e);
+		reprint(e);
+	}
 	return (0);
 }

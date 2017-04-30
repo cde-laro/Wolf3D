@@ -17,7 +17,9 @@ SRC_FT = main \
 		 minimap \
 		 wolf \
 		 hook \
-		 move
+		 move \
+		 skybox \
+		 useful_functions
 
 OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
 	SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)

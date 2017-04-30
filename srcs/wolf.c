@@ -6,14 +6,34 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 02:26:09 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/04/30 08:00:27 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <stdio.h>
 
-void	calc_line_len(t_env *e, int x, int side)
+void		jump_dec(t_env *e)
+{
+	if (!e->k->jump_state)
+		return ;
+	else if (e->k->jump_state == 1)
+	{
+		if (e->k->jump >= JUMP_MAX)
+			e->k->jump_state = -1;
+		else
+			e->k->jump += 5;
+	}
+	else if (e->k->jump_state == -1)
+	{
+		if (e->k->jump <= 0)
+			e->k->jump_state = 0;
+		else
+			e->k->jump -= 7;
+	}
+}
+
+void	calc_line_len(t_env *e, int x)
 {
 	t_intp		top;
 	t_intp		bottom;
@@ -22,16 +42,14 @@ void	calc_line_len(t_env *e, int x, int side)
 	bottom.y = WIN_Y;
 	top.x = x;
 	top.y = 0;
-	e->p->line_h = (int)(WIN_Y / e->p->pwd * 2);
+	e->p->line_h = (int)(WIN_Y / e->p->pwd * 3);
 	e->p->draw_start.x = x;
-	e->p->draw_start.y = (-e->p->line_h / 2 + WIN_Y / 2) - e->k->sneak;
+	e->p->draw_start.y = (-e->p->line_h / 2 + WIN_Y / 2) - e->k->sneak + e->k->jump;
 	e->p->draw_start.y = (e->p->draw_start.y < 0 ? 0 : e->p->draw_start.y);
 	e->p->draw_end.x = x;
-	e->p->draw_end.y = e->p->line_h / 2 + WIN_Y / 2 - e->k->sneak;
+	e->p->draw_end.y = e->p->line_h / 2 + WIN_Y / 2 - e->k->sneak + e->k->jump;
 	e->p->draw_end.y = (e->p->draw_end.y > WIN_Y ? WIN_Y : e->p->draw_end.y);
-	draw_line(e, top, e->p->draw_start, 0x0087CEEB);
-	draw_line(e, e->p->draw_start, e->p->draw_end,
-		(side == 0 ? 0x000000FF : 0x00FF0000));
+	draw_line(e, e->p->draw_start, e->p->draw_end, e->p->color);
 	draw_line(e, e->p->draw_end, bottom, 0x00AFAFAF);
 }
 
@@ -56,12 +74,18 @@ void	find_wall(t_env *e, int hit, int x)
 		hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : hit);
 	}
 	if (side == 0)
+	{
+		e->p->color = (e->p->step.x == -1 ? 0x00FF0000 : 0x0000FF00);
 		e->p->pwd = (e->p->map.x - e->p->rayp.x + (1 - e->p->step.x) / 2)
 			/ e->p->rayd.x;
+	}
 	else
+	{
+		e->p->color = (e->p->step.y == -1 ? 0x000000FF : 0x00FFFF00);
 		e->p->pwd = (e->p->map.y - e->p->rayp.y + (1 - e->p->step.y) / 2)
 			/ e->p->rayd.y;
-	calc_line_len(e, x, side);
+	}
+	calc_line_len(e, x);
 }
 
 void	draw_column(t_env *e, int x)
@@ -101,6 +125,7 @@ void	draw_frame(t_env *e)
 
 void	start(t_env *e)
 {
+
 	e->p = (t_player *)malloc(sizeof(t_player));
 	if (e->map->data[2][2])
 	{
@@ -114,7 +139,6 @@ void	start(t_env *e)
 	e->p->plane.x = 0;
 	e->p->plane.y = 0.66;
 	e->p->speed = 0.3;
-	e->p->r_s = 0.2;
+	e->p->r_s = 0.1;
 	draw_frame(e);
-	reset_img(e);
 }
