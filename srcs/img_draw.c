@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 04:27:31 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 06:54:27 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/01 22:48:54 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,3 @@ void		draw_line(t_env *e, t_intp a, t_intp b, int z)
 		}
 	}
 }
-/*
-void		reset_img(t_env *e)
-{
-	mlx_clear_window(e->mlx, e->win);
-	
-	mlx_destroy_image(e->mlx, e->img->ptr_img);
-	init_img(e);
-}*/

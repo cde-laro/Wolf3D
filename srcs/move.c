@@ -6,11 +6,33 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 05:05:54 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 07:35:48 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 01:08:58 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void	jump_dec(t_env *e)
+{
+	if (!e->k->jump_state)
+		return ;
+	else if (e->k->jump_state == 1)
+	{
+		if (e->k->jump >= JUMP_MAX)
+			e->k->jump_state = -1;
+		else
+			e->k->jump += 7;
+	}
+	else if (e->k->jump_state <= -1)
+	{
+		if (e->k->jump <= 0)
+			e->k->jump_state = 0;
+		else
+			e->k->jump -= 7;
+	}
+	if (e->k->jump_state == 1 || e->k->jump_state == -1)
+		move(e, 1);
+}
 
 void	rotate(t_env *e, int dir)
 {

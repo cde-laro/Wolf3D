@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 07:33:25 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 06:56:58 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-# define BUFF_SIZE 424242
+# define BUFF_SIZE 1000000
 # define PI M_PI
 # define RAD(x) (PI * x / 180)
 # define WIN_X 1080
 # define WIN_Y 720
 # define DEF_SPEED 0.3
-# define JUMP_MAX 75
+# define JUMP_MAX 50
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -84,7 +84,6 @@ typedef struct	s_player
 {
 	double		speed;
 	double		r_s;
-	double		angle;
 	double		rat;
 	t_point		pos;
 	t_point		map;
@@ -92,7 +91,6 @@ typedef struct	s_player
 	t_point		plane;
 	t_point		rayp;
 	t_point		rayd;
-	t_intp		boxp;
 	t_point		sided;
 	t_point		deltad;
 	double		pwd;
@@ -100,7 +98,7 @@ typedef struct	s_player
 	int			line_h;
 	t_intp		draw_start;
 	t_intp		draw_end;
-	int			color;
+	//int			color;
 }				t_player;
 
 typedef struct	s_env
@@ -114,15 +112,15 @@ typedef struct	s_env
 	t_player	*p;
 	t_keys		*k;
 	t_sky		*s;
+	t_sky		*g;
 }				t_env;
 
 char			*ft_strjoin_free(char *s1, char *s2);
 int				check_char(char *str, char *filename);
 t_map			*parse(char *path);
-//int				key_funct(int k, t_env *e);
 int				key_press(int k, t_env *e);
 int				key_release(int k, t_env *e);
-void			init(t_env *e);
+t_env			*init(char *name);
 void			draw_line(t_env *e, t_intp a, t_intp b, int z);
 void			start(t_env *e);
 void			init_img(t_env *e);
@@ -138,5 +136,9 @@ int				red_cross(int key, t_env *e);
 void			pix_put_img(t_env *e, int x, int y, int color);
 void			mlx_clr_img(t_env *e);
 void 			reprint(t_env *e);
+int				set_color(int side, int stepx, int stepy);
+void			print_error_code(int code);
+void 			print_instruction(void);
+void			print_map(t_env *e, int **data, int maxx, int maxy);
 
 #endif

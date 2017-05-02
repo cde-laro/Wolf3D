@@ -6,34 +6,14 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 08:00:27 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 06:39:53 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <stdio.h>
 
-void		jump_dec(t_env *e)
-{
-	if (!e->k->jump_state)
-		return ;
-	else if (e->k->jump_state == 1)
-	{
-		if (e->k->jump >= JUMP_MAX)
-			e->k->jump_state = -1;
-		else
-			e->k->jump += 5;
-	}
-	else if (e->k->jump_state == -1)
-	{
-		if (e->k->jump <= 0)
-			e->k->jump_state = 0;
-		else
-			e->k->jump -= 7;
-	}
-}
-
-void	calc_line_len(t_env *e, int x)
+void	calc_line_len(t_env *e, int x, int color)
 {
 	t_intp		top;
 	t_intp		bottom;
@@ -44,19 +24,22 @@ void	calc_line_len(t_env *e, int x)
 	top.y = 0;
 	e->p->line_h = (int)(WIN_Y / e->p->pwd * 3);
 	e->p->draw_start.x = x;
-	e->p->draw_start.y = (-e->p->line_h / 2 + WIN_Y / 2) - e->k->sneak + e->k->jump;
+	e->p->draw_start.y = (-e->p->line_h / 2 + WIN_Y / 2) - e->k->sneak +
+		e->k->jump;
 	e->p->draw_start.y = (e->p->draw_start.y < 0 ? 0 : e->p->draw_start.y);
 	e->p->draw_end.x = x;
 	e->p->draw_end.y = e->p->line_h / 2 + WIN_Y / 2 - e->k->sneak + e->k->jump;
 	e->p->draw_end.y = (e->p->draw_end.y > WIN_Y ? WIN_Y : e->p->draw_end.y);
-	draw_line(e, e->p->draw_start, e->p->draw_end, e->p->color);
+	draw_line(e, e->p->draw_start, e->p->draw_end, color);
 	draw_line(e, e->p->draw_end, bottom, 0x00AFAFAF);
 }
 
-void	find_wall(t_env *e, int hit, int x)
+void	find_wall(t_env *e, int hit, int x, int side)
 {
-	int		side;
-
+//	printf("y = %d, x = %d\n",(int)e->p->map.y, (int)e->p->map.x);
+	//print_map(e->map->data, e->map->maxx, e->map->maxy);
+//	printf("Hit on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
+	hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : 0);
 	while (hit == 0)
 	{
 		if (e->p->sided.x < e->p->sided.y)
@@ -71,25 +54,25 @@ void	find_wall(t_env *e, int hit, int x)
 			e->p->map.y += e->p->step.y;
 			side = 1;
 		}
-		hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : hit);
+		if (e->p->map.y > e->map->maxy || e->p->map.x > e->map->maxx ||
+			e->p->map.x < 0 || e->p->map.x < 0)
+			print_error_code(12);
+//	printf("y = %d, x = %d\n",(int)e->p->map.y, (int)e->p->map.x);
+//	printf("Hit on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
+		hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : 0);
 	}
 	if (side == 0)
-	{
-		e->p->color = (e->p->step.x == -1 ? 0x00FF0000 : 0x0000FF00);
 		e->p->pwd = (e->p->map.x - e->p->rayp.x + (1 - e->p->step.x) / 2)
 			/ e->p->rayd.x;
-	}
 	else
-	{
-		e->p->color = (e->p->step.y == -1 ? 0x000000FF : 0x00FFFF00);
 		e->p->pwd = (e->p->map.y - e->p->rayp.y + (1 - e->p->step.y) / 2)
 			/ e->p->rayd.y;
-	}
-	calc_line_len(e, x);
+	calc_line_len(e, x, set_color(side, e->p->step.x, e->p->step.y));
 }
 
 void	draw_column(t_env *e, int x)
 {
+	//ft_putnbr(x);
 	e->p->deltad.x = sqrt(1 + SQ(e->p->rayd.y) / SQ(e->p->rayd.x));
 	e->p->deltad.y = sqrt(1 + SQ(e->p->rayd.x) / SQ(e->p->rayd.y));
 	e->p->step.x = (e->p->rayd.x < 0 ? -1 : 1);
@@ -102,7 +85,9 @@ void	draw_column(t_env *e, int x)
 		e->p->sided.y = (e->p->rayp.y - e->p->map.y) * e->p->deltad.y;
 	else
 		e->p->sided.y = (e->p->map.y + 1 - e->p->rayp.y) * e->p->deltad.y;
-	find_wall(e, 0, x);
+	//ft_putendl("lel");
+//	printf("test on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
+	find_wall(e, 0, x, 0);
 }
 
 void	draw_frame(t_env *e)
@@ -119,6 +104,8 @@ void	draw_frame(t_env *e)
 		e->p->rayd.y = e->p->dir.y + e->p->plane.y * e->p->rat;
 		e->p->map.x = (int)e->p->rayp.x;
 		e->p->map.y = (int)e->p->rayp.y;
+	//	ft_putendl("lel");
+//		printf("test on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
 		draw_column(e, x);
 	}
 }
@@ -132,13 +119,12 @@ void	start(t_env *e)
 		ft_putendl("The case [2][2] must be empty");
 		exit(-1);
 	}
-	e->p->pos.x = 2;
-	e->p->pos.y = 2;
+	e->p->pos.x = 12;
+	e->p->pos.y = 12;
 	e->p->dir.x = -0.5;
 	e->p->dir.y = 0;
 	e->p->plane.x = 0;
 	e->p->plane.y = 0.66;
 	e->p->speed = 0.3;
 	e->p->r_s = 0.1;
-	draw_frame(e);
 }

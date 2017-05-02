@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 02:09:26 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/27 00:18:29 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 06:25:41 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 int		main(int ac, char **av)
 {
-	t_env		e;
+	t_env		*e;
 
 	if (ac != 2)
 	{
 		ft_putendl("usage: ./wolf <map name>");
 		return (-1);
 	}
-	init(&e);
-	(void)av;
-	ft_putendl("Extraction ...");
-	if (!(e.map = parse(av[1])))
-		return (-1);
 	ft_putendl("Extracted");
-	start(&e);
-	mlx_loop(e.mlx);
+	e = init(av[1]);
+	start(e);
+	print_instruction();
+	print_map(e, e->map->data, e->map->maxx, e->map->maxy);
+	ft_putendl("start loop");
+	mlx_loop(e->mlx);
 	return (0);
 }

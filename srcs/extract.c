@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 23:55:59 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/26 23:57:12 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 06:30:44 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int		check_char(char *str, char *filename)
 						str[i] == ' ' || str[i] == '-')))
 		{
 			system("clear");
-			ft_putstr("There is a \"");
+			ft_putendl("There is a \"");
 			ft_putchar(str[i]);
-			ft_putstr("\" on char: ");
+			ft_putendl("\" on char: ");
 			ft_putnbr(i);
-			ft_putstr(" of ");
-			ft_putstr(filename);
+			ft_putendl(" of ");
+			ft_putendl(filename);
 			ft_putendl("\nPlease check your file");
 			return (-1);
 		}
@@ -68,7 +68,7 @@ int		check_line_len(char **tab, int maxy)
 		if (ft_countelem(tab[i], ' ') != dest)
 		{
 			system("clear");
-			ft_putstr("Line ");
+			ft_putendl("Line ");
 			ft_putnbr(i);
 			ft_putendl(" don't have the same lenght than other lines");
 			ft_putendl("Check your map");

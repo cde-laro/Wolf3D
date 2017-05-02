@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/04/30 07:33:51 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 06:37:04 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 int		game_loop(t_env *e)
 {
-	int static		ticks = 0;
+	ft_putendl("start loop");
+	print_map(e, e->map->data, e->map->maxx, e->map->maxy);
+	static int	ticks = 0;
 
 	e->p->speed = (e->k->sprint ? DEF_SPEED * 2 : DEF_SPEED);
 	e->p->speed = (e->k->sneak ? DEF_SPEED / 2 : e->p->speed);
@@ -23,21 +25,15 @@ int		game_loop(t_env *e)
 		rotate(e, -1);
 	if (e->k->left)
 		rotate(e, 1);
-	if (e->k->up)
+	if (e->k->up && e->k->jump_state == 0)
 		move(e, 1);
-	if (e->k->down)
+	if (e->k->down && e->k->jump_state == 0)
 		move(e, -1);
-//	if (e->k->up || e->k->down || e->k->left || e->k->right || e->k->jump_state)
-	//{
-		//ft_putchar('|');
 	jump_dec(e);
 	ticks++;
 	if (ticks % 2 == 0 && e->k->rotation)
-		e->k->dec.x++;
+		e->k->dec.x--;
 	reprint(e);
-//	}
-//	else
-		//usleep(50000);
 	return (0);
 }
 
@@ -59,10 +55,9 @@ int		key_press(int k, t_env *e)
 		reprint(e);
 	}
 	else if (k == KEY_SPACEBAR)
-	{
-		if (e->k->jump_state == 0)
-			e->k->jump_state = 1;
-	}
+		e->k->jump_state = (!e->k->jump_state ? 1 : e->k->jump_state);
+	else if (k == KEY_R)
+		e->k->rotation = (e->k->rotation ? 0 : 1);
 	else if (k == KEY_ESCAPE)
 		exit(0);
 	return (0);

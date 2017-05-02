@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cde-laro <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 13:55:00 by cde-laro          #+#    #+#              #
-#    Updated: 2017/01/20 15:14:04 by cde-laro         ###   ########.fr        #
+#    Updated: 2017/05/02 00:53:53 by cde-laro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,12 @@ all : $(NAME)
 
 $(NAME) :
 	@echo "Start compilation"
-	@gcc -Wall -Werror -Wextra -c $(SRC) -I $(INCLUDE)
+	@gcc -g -Wall -Werror -Wextra -c $(SRC) -I $(INCLUDE)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "Compilation done"
 
-clean : 
+clean :
 	@rm -f $(OBJ)
 	@echo "Cleared"
 
