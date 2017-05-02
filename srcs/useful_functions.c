@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 05:30:32 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 06:30:27 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 07:10:08 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,10 @@ char		*ft_strjoin_free(char *s1, char *s2)
 
 int		set_color(int side, int stepx, int stepy)
 {
-	int		color;
-
 	if (side == 0)
-		color = (stepx == -1 ? 0x00FF0000 : 0x0000FF00);
+		return(stepx == -1 ? RED : GREEN);
 	else
-		color = (stepy == -1 ? 0x000000FF : 0x00FFFF00);
-	return (color);
+		return(stepy == -1 ? BLUE : YELLOW);
 }
 
 int		red_cross(int key, t_env *e)

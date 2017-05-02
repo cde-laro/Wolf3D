@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 06:56:58 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 07:10:24 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "limits.h"
 # include "keys.h"
 # include "mlx.h"
+# include "color.h"
 # include <math.h>
 # include <fcntl.h>
 # include <sys/types.h>

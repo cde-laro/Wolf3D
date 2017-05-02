@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 06:39:53 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 07:10:39 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,11 @@ void	calc_line_len(t_env *e, int x, int color)
 	e->p->draw_end.y = e->p->line_h / 2 + WIN_Y / 2 - e->k->sneak + e->k->jump;
 	e->p->draw_end.y = (e->p->draw_end.y > WIN_Y ? WIN_Y : e->p->draw_end.y);
 	draw_line(e, e->p->draw_start, e->p->draw_end, color);
-	draw_line(e, e->p->draw_end, bottom, 0x00AFAFAF);
+	draw_line(e, e->p->draw_end, bottom, GREY);
 }
 
 void	find_wall(t_env *e, int hit, int x, int side)
 {
-//	printf("y = %d, x = %d\n",(int)e->p->map.y, (int)e->p->map.x);
-	//print_map(e->map->data, e->map->maxx, e->map->maxy);
-//	printf("Hit on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
 	hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : 0);
 	while (hit == 0)
 	{
@@ -57,8 +54,6 @@ void	find_wall(t_env *e, int hit, int x, int side)
 		if (e->p->map.y > e->map->maxy || e->p->map.x > e->map->maxx ||
 			e->p->map.x < 0 || e->p->map.x < 0)
 			print_error_code(12);
-//	printf("y = %d, x = %d\n",(int)e->p->map.y, (int)e->p->map.x);
-//	printf("Hit on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
 		hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : 0);
 	}
 	if (side == 0)
@@ -72,7 +67,6 @@ void	find_wall(t_env *e, int hit, int x, int side)
 
 void	draw_column(t_env *e, int x)
 {
-	//ft_putnbr(x);
 	e->p->deltad.x = sqrt(1 + SQ(e->p->rayd.y) / SQ(e->p->rayd.x));
 	e->p->deltad.y = sqrt(1 + SQ(e->p->rayd.x) / SQ(e->p->rayd.y));
 	e->p->step.x = (e->p->rayd.x < 0 ? -1 : 1);
@@ -85,8 +79,6 @@ void	draw_column(t_env *e, int x)
 		e->p->sided.y = (e->p->rayp.y - e->p->map.y) * e->p->deltad.y;
 	else
 		e->p->sided.y = (e->p->map.y + 1 - e->p->rayp.y) * e->p->deltad.y;
-	//ft_putendl("lel");
-//	printf("test on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
 	find_wall(e, 0, x, 0);
 }
 
@@ -104,8 +96,6 @@ void	draw_frame(t_env *e)
 		e->p->rayd.y = e->p->dir.y + e->p->plane.y * e->p->rat;
 		e->p->map.x = (int)e->p->rayp.x;
 		e->p->map.y = (int)e->p->rayp.y;
-	//	ft_putendl("lel");
-//		printf("test on |%d|%d| ? %d\n",(int)e->p->map.y, (int)e->p->map.x, e->map->data[(int)e->p->map.y][(int)e->p->map.x]);
 		draw_column(e, x);
 	}
 }
