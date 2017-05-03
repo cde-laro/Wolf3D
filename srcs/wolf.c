@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 07:10:39 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 03:02:23 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	calc_line_len(t_env *e, int x, int color)
 	bottom.y = WIN_Y;
 	top.x = x;
 	top.y = 0;
-	e->p->line_h = (int)(WIN_Y / e->p->pwd * 3);
+	e->p->line_h = (int)(WIN_Y / e->p->pwd) * 3;
 	e->p->draw_start.x = x;
 	e->p->draw_start.y = (-e->p->line_h / 2 + WIN_Y / 2) - e->k->sneak +
 		e->k->jump;

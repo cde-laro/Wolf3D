@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 05:30:32 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 02:27:49 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 03:04:22 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,10 @@ int		red_cross(int key, t_env *e)
 
 void	reprint(t_env *e)
 {
-	mlx_paste_img(e, e->sky, int_to_intp(0, 0));
+	mlx_paste_img(e, e->sky, int_to_intp(0, 0), 1);
 	draw_frame(e);
-	//mlx_paste_img(e, e->gun, int_to_intp(WIN_X / 2, WIN_Y - e->gun->a.y - 200));
 	mlx_put_image_to_window(e->mlx, e->win, e->img->ptr_img, 0, 0);
-	mlx_put_image_to_window(e->mlx, e->win, e->gun->img->ptr_img, WIN_X / 2,
+	mlx_put_image_to_window(e->mlx, e->win, e->gun->img->ptr_img, WIN_X / 2 + 100,
 		WIN_Y - e->gun->a.y);
 }
 

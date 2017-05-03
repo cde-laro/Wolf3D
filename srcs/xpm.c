@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:03:35 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 01:37:52 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 02:46:03 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ t_xpm	*init_xpm(t_env *e, char *path)
 	return (target);
 }
 
-void	mlx_paste_img(t_env *e, t_xpm *xpm, t_intp coord)
+void	mlx_paste_img(t_env *e, t_xpm *xpm, t_intp coord, int sky)
 {
 	t_intp	dec;
 	t_intp  tmp;
 
 
-	dec.x = 0;//e->k->dec.x % xpm->a.x;
-	dec.y =  0; //e->k->dec.y % xpm->a.y;
+	dec.x =  (!sky ? 0 : e->k->dec.x % xpm->a.x);
+	dec.y =  (!sky ? 0 : e->k->dec.y % xpm->a.y);
 	tmp.x = coord.x;
 	while (tmp.x < WIN_X)
 	{

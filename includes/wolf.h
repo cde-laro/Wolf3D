@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 01:34:17 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 02:46:24 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int				check_char(char *str, char *filename);
 t_map			*parse(char *path);
 int				key_press(int k, t_env *e);
 int				key_release(int k, t_env *e);
+int				mouse_funct(int button,int x,int y, t_env *e);
 t_env			*init(char *name);
 void			draw_line(t_env *e, t_intp a, t_intp b, int z);
 void			start(t_env *e);
@@ -147,7 +148,7 @@ void			print_error_code(int code);
 void 			print_instruction(void);
 void			print_map(t_env *e, int **data, int maxx, int maxy);
 t_xpm			*init_xpm(t_env *e, char *path);
-void			mlx_paste_img(t_env *e, t_xpm *xpm, t_intp coord);
+void			mlx_paste_img(t_env *e, t_xpm *xpm, t_intp coord, int sky);
 void			mlx_img_copy(t_env *e, t_intp coord, t_intp dec, t_xpm *src);
 
 #endif

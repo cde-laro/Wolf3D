@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 02:28:15 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 02:40:07 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_env	*init(char *name)
 	mlx_hook(e->win, 17, (1L << 17), red_cross, e);
 	mlx_hook(e->win, 2, (1L << 0), key_press, e);
 	mlx_hook(e->win, 3, (1L << 1), key_release, e);
+	mlx_mouse_hook (e->win, mouse_funct, e);
 	mlx_loop_hook(e->mlx, game_loop, e);
 	return (e);
 }
