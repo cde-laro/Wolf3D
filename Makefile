@@ -6,7 +6,7 @@
 #    By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 23:16:20 by cde-laro          #+#    #+#              #
-#    Updated: 2017/05/03 00:47:57 by cde-laro         ###   ########.fr        #
+#    Updated: 2017/05/03 06:06:19 by cde-laro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC_FT = main \
 		 skybox \
 		 useful_functions \
 		 txt_display \
-		 xpm
+		 xpm \
+		 map_builder
 
 OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
 SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)
@@ -49,6 +50,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) -c $< -o $@
 
 $(NAME): $(OBJ_DIR) $(SRC)
+	@afplay resources/compile.mp3 &
 	@$(MAKE) $(OBJ)
 	@echo "$(COLOR)Objects of $(NAME)\t\t\0033[0;32m[Created]\0033[0;37m"
 	@make -j -C $(LIB_DIR)

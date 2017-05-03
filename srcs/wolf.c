@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 03:02:23 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 04:52:43 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	calc_line_len(t_env *e, int x, int color)
 	bottom.y = WIN_Y;
 	top.x = x;
 	top.y = 0;
-	e->p->line_h = (int)(WIN_Y / e->p->pwd) * 3;
+	e->p->line_h = (int)((WIN_Y / e->p->pwd) * 3);
 	e->p->draw_start.x = x;
 	e->p->draw_start.y = (-e->p->line_h / 2 + WIN_Y / 2) - e->k->sneak +
 		e->k->jump;
@@ -104,17 +104,18 @@ void	start(t_env *e)
 {
 
 	e->p = (t_player *)malloc(sizeof(t_player));
-	if (e->map->data[2][2])
+	if (e->map->data[e->map->maxy / 2][e->map->maxx / 2])
 	{
-		ft_putendl("The case [2][2] must be empty");
+		ft_putendl("The center must be empty");
 		exit(-1);
 	}
-	e->p->pos.x = 12;
-	e->p->pos.y = 12;
+	e->p->pos.x = e->map->maxx / 2;
+	e->p->pos.y = e->map->maxy / 2;
 	e->p->dir.x = -0.5;
 	e->p->dir.y = 0;
 	e->p->plane.x = 0;
 	e->p->plane.y = 0.66;
 	e->p->speed = 0.3;
 	e->p->r_s = 0.1;
+	e->p->crossy = 40;
 }

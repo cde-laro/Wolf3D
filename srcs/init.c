@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 02:40:07 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 05:35:46 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,13 @@ t_env	*init(char *name)
 		print_error_code(5);
 	if (!(e->map = parse(name)))
 		exit (-1);
+//	(void)name;
+	//create_empty_map(e, 15, 15);
 	init_img(e);
 	init_keys_value(e);
 	e->sky = init_xpm(e, "resources/sky.xpm");
 	e->gun = init_xpm(e, "resources/lel.xpm");
+	e->cross = init_xpm(e, "resources/cross.xpm");
 	mlx_hook(e->win, 17, (1L << 17), red_cross, e);
 	mlx_hook(e->win, 2, (1L << 0), key_press, e);
 	mlx_hook(e->win, 3, (1L << 1), key_release, e);

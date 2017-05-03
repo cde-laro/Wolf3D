@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 05:05:54 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 07:14:18 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 05:00:40 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	jump_dec(t_env *e)
 		return ;
 	else if (e->k->jump_state == 1)
 	{
+	// 	e->p->crossy += 3;
 		if (e->k->jump >= JUMP_MAX)
 			e->k->jump_state = -1;
 		else

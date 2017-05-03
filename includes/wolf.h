@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 02:46:24 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 04:41:50 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct	s_player
 	int			line_h;
 	t_intp		draw_start;
 	t_intp		draw_end;
+	int			crossy;
 }				t_player;
 
 typedef struct	s_env
@@ -119,9 +120,11 @@ typedef struct	s_env
 	t_keys		*k;
 	t_xpm		*sky;
 	t_xpm		*gun;
+	t_xpm		*cross;
 }				t_env;
 
 char			*ft_strjoin_free(char *s1, char *s2);
+void			create_empty_map(t_env *e, int x, int y);
 int				check_char(char *str, char *filename);
 t_map			*parse(char *path);
 int				key_press(int k, t_env *e);
@@ -141,7 +144,6 @@ int				game_loop(t_env *e);
 void			jump_dec(t_env *e);
 int				red_cross(int key, t_env *e);
 void			pix_put_img(t_env *e, int x, int y, int color);
-//void			mlx_clr_img(t_env *e);
 void 			reprint(t_env *e);
 int				set_color(int side, int stepx, int stepy);
 void			print_error_code(int code);

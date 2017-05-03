@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 02:42:28 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 05:46:07 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ int		mouse_funct(int button,int x,int y, t_env *e)
 	(void)y;
 	(void)e;
 	if (button == 1)
+	{
+		if (!e->k->sneak)
+			e->p->crossy += 11;
 		system("afplay resources/fire.mp3 &");
+	}
 	return (0);
 }
 
 int		game_loop(t_env *e)
 {
-	ft_putendl("start loop");
 	print_map(e, e->map->data, e->map->maxx, e->map->maxy);
 	static int	ticks = 0;
 
@@ -41,6 +44,8 @@ int		game_loop(t_env *e)
 		move(e, -1);
 	jump_dec(e);
 	ticks++;
+	if (!e->k->sneak)
+		e->p->crossy *= 0.9999;
 	if (ticks % 2 == 0 && e->k->rotation)
 		e->k->dec.x--;
 	reprint(e);
@@ -61,6 +66,7 @@ int		key_press(int k, t_env *e)
 		e->k->sprint = 1;
 	else if (k == KEY_Z)
 	{
+		e->p->crossy = 100;
 		e->k->sneak = 100;
 		reprint(e);
 	}
@@ -87,6 +93,7 @@ int		key_release(int k, t_env *e)
 		e->k->sprint = 0;
 	else if (k == KEY_Z)
 	{
+		e->p->crossy = 0;
 		e->k->sneak = 0;
 		reprint(e);
 	}

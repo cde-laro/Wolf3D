@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 05:30:32 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 03:04:22 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 06:02:12 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,13 @@ void	reprint(t_env *e)
 	mlx_put_image_to_window(e->mlx, e->win, e->img->ptr_img, 0, 0);
 	mlx_put_image_to_window(e->mlx, e->win, e->gun->img->ptr_img, WIN_X / 2 + 100,
 		WIN_Y - e->gun->a.y);
+	mlx_put_image_to_window(e->mlx, e->win, e->cross->img->ptr_img, WIN_X / 2 +
+		e->cross->a.x / 2, WIN_Y / 2 + e->cross->a.y / 2 - e->p->crossy);
 }
 
 void	print_error_code(int code)
 {
+	system("afplay resources/erro.mp3 &");
 	ft_putstr("An error has occured: ");
 	ft_putnbr(code);
 	ft_putstr("   Leaving Wolf 3D ...");
@@ -85,7 +88,7 @@ void	print_error_code(int code)
 
 void	print_map(t_env *e, int **data, int maxx, int maxy)
 {
-	int		x;
+	/*int		x;
 	int		y;
 
 	y = 0;
@@ -101,6 +104,10 @@ void	print_map(t_env *e, int **data, int maxx, int maxy)
 			x++;
 		}
 		y++;
-		ft_putchar('\n');
-	}
+		ft_putchar('\n');*/
+		(void)e;
+		(void)data;
+		(void)maxx;
+		(void)maxy;
+	//}
 }
