@@ -6,7 +6,7 @@
 #    By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 23:16:20 by cde-laro          #+#    #+#              #
-#    Updated: 2017/05/02 06:29:58 by cde-laro         ###   ########.fr        #
+#    Updated: 2017/05/03 00:47:57 by cde-laro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC_FT = main \
 		 move \
 		 skybox \
 		 useful_functions \
-		 txt_display
+		 txt_display \
+		 xpm
 
 OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
 SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)

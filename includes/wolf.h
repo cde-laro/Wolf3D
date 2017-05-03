@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 07:10:24 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 01:34:17 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ typedef struct	s_sky
 	t_intp		a;
 }				t_sky;
 
+typedef struct	s_xpm
+{
+	t_img		*img;
+	t_intp		a;
+}				t_xpm;
+
 typedef struct	s_keys
 {
 	int			up;
@@ -99,7 +105,6 @@ typedef struct	s_player
 	int			line_h;
 	t_intp		draw_start;
 	t_intp		draw_end;
-	//int			color;
 }				t_player;
 
 typedef struct	s_env
@@ -112,8 +117,8 @@ typedef struct	s_env
 	t_map		*map;
 	t_player	*p;
 	t_keys		*k;
-	t_sky		*s;
-	t_sky		*g;
+	t_xpm		*sky;
+	t_xpm		*gun;
 }				t_env;
 
 char			*ft_strjoin_free(char *s1, char *s2);
@@ -135,11 +140,14 @@ int				game_loop(t_env *e);
 void			jump_dec(t_env *e);
 int				red_cross(int key, t_env *e);
 void			pix_put_img(t_env *e, int x, int y, int color);
-void			mlx_clr_img(t_env *e);
+//void			mlx_clr_img(t_env *e);
 void 			reprint(t_env *e);
 int				set_color(int side, int stepx, int stepy);
 void			print_error_code(int code);
 void 			print_instruction(void);
 void			print_map(t_env *e, int **data, int maxx, int maxy);
+t_xpm			*init_xpm(t_env *e, char *path);
+void			mlx_paste_img(t_env *e, t_xpm *xpm, t_intp coord);
+void			mlx_img_copy(t_env *e, t_intp coord, t_intp dec, t_xpm *src);
 
 #endif

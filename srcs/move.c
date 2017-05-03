@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 05:05:54 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 01:08:58 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/02 07:14:18 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	jump_dec(t_env *e)
 		if (e->k->jump >= JUMP_MAX)
 			e->k->jump_state = -1;
 		else
-			e->k->jump += 7;
+			e->k->jump += 5;
 	}
 	else if (e->k->jump_state <= -1)
 	{
 		if (e->k->jump <= 0)
 			e->k->jump_state = 0;
 		else
-			e->k->jump -= 7;
+			e->k->jump -= 5;
 	}
 	if (e->k->jump_state == 1 || e->k->jump_state == -1)
 		move(e, 1);

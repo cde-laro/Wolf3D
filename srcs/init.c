@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 07:00:52 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 02:28:15 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_keys_value(t_env *e)
 	e->k->dec.y = 50;
 	e->k->rotation = 1;
 }
-
+/*
 void	init_skybox(t_env *e)
 {
 	if (!(e->s = (t_sky *)malloc(sizeof(t_sky))))
@@ -49,7 +49,7 @@ void	init_skybox(t_env *e)
 	if (!(e->s->img->bts = mlx_get_data_addr(e->s->img->ptr_img,
 		&(e->s->img->bpp), &(e->s->img->size_line), &(e->s->img->end))))
 		print_error_code(9);
-}
+}*/
 
 t_env	*init(char *name)
 {
@@ -70,7 +70,8 @@ t_env	*init(char *name)
 		exit (-1);
 	init_img(e);
 	init_keys_value(e);
-	init_skybox(e);
+	e->sky = init_xpm(e, "resources/sky.xpm");
+	e->gun = init_xpm(e, "resources/lel.xpm");
 	mlx_hook(e->win, 17, (1L << 17), red_cross, e);
 	mlx_hook(e->win, 2, (1L << 0), key_press, e);
 	mlx_hook(e->win, 3, (1L << 1), key_release, e);

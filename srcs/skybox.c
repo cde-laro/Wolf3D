@@ -6,12 +6,12 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 06:57:06 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/02 01:13:12 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/03 00:47:35 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
+/*
 void	mlx_img_copy(t_env *e, int x, int y, t_intp dec)
 {
 	if (y >= 0 && x >= 0 && y < WIN_Y && x < WIN_X)
@@ -27,24 +27,4 @@ void	mlx_img_copy(t_env *e, int x, int y, t_intp dec)
 			((e->s->img->bpp / 8) * (x + dec.x))];
 	}
 }
-
-void	mlx_clr_img(t_env *e)
-{
-	int		x;
-	int		y;
-	t_intp	dec;
-
-	dec.x = e->k->dec.x % e->s->a.x;
-	dec.y = e->k->dec.y % e->s->a.y;
-	x = 0;
-	while (x < WIN_X)
-	{
-		y = 0;
-		while (y < WIN_Y)
-		{
-			mlx_img_copy(e, x, y, dec);
-			y++;
-		}
-		x++;
-	}
-}
+*/
