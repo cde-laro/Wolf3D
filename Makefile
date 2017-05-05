@@ -6,7 +6,7 @@
 #    By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 23:16:20 by cde-laro          #+#    #+#              #
-#    Updated: 2017/05/03 06:06:19 by cde-laro         ###   ########.fr        #
+#    Updated: 2017/05/05 06:15:16 by cde-laro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ SRC_FT = main \
 		 useful_functions \
 		 txt_display \
 		 xpm \
-		 map_builder
+		 map_builder \
+		 textures \
+		 init_txt
 
 OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
 SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)
@@ -50,13 +52,14 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) -c $< -o $@
 
 $(NAME): $(OBJ_DIR) $(SRC)
-	@afplay resources/compile.mp3 &
 	@$(MAKE) $(OBJ)
 	@echo "$(COLOR)Objects of $(NAME)\t\t\0033[0;32m[Created]\0033[0;37m"
 	@make -j -C $(LIB_DIR)
+	@afplay resources/compile.mp3 &
 	@make -j -C $(MLX_DIR)
 	@$(CC) $(LIB) $(OBJ) $(MLX) -o $@
 	@echo "$(COLOR)$(NAME)\t\t\t\0033[0;32m[Created]\0033[0;37m"
+
 
 clean:
 	@rm -rf $(OBJ_DIR)

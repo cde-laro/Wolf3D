@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 05:46:07 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/05 07:58:44 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,17 @@ int		mouse_funct(int button,int x,int y, t_env *e)
 	(void)x;
 	(void)y;
 	(void)e;
-	if (button == 1)
+	if (button == 1 && e->p->ammo_tick == 0)
 	{
-		if (!e->k->sneak)
-			e->p->crossy += 11;
-		system("afplay resources/fire.mp3 &");
+		if (e->p->ammo != 0)
+		{
+			if (!e->k->sneak)
+				e->p->crossy += 11;
+			system("afplay resources/sounds/fire.mp3 &");
+			e->p->ammo--;
+		}
+		else
+			system("afplay resources/sounds/empty.mp3 &");
 	}
 	return (0);
 }
@@ -43,6 +49,9 @@ int		game_loop(t_env *e)
 	if (e->k->down && e->k->jump_state == 0)
 		move(e, -1);
 	jump_dec(e);
+	e->p->ammo_tick -= (e->p->ammo_tick == 0 ? 0 : 1);
+	printf("Ammo = %d, ammo-tick = %d\n", e->p->ammo, e->p->ammo_tick);
+	e->p->ammo = (e->p->ammo_tick == 1 ? DEF_AMMO : e->p->ammo);
 	ticks++;
 	if (!e->k->sneak)
 		e->p->crossy *= 0.9999;
@@ -64,11 +73,22 @@ int		key_press(int k, t_env *e)
 		e->k->down = 1;
 	else if (k == KEY_SHIFT_LEFT)
 		e->k->sprint = 1;
+	else if (k == KEY_T)
+		e->pack = (e->pack == TXT_PACK ? 0 : e->pack + 1);
 	else if (k == KEY_Z)
 	{
 		e->p->crossy = 100;
 		e->k->sneak = 100;
 		reprint(e);
+	}
+	else if (k == KEY_R)
+	{
+		if (e->p->ammo_tick == 0)
+		{
+			ft_putendl("lel");
+			system("afplay resources/sounds/reload.mp3 &");
+			e->p->ammo_tick = 40;
+		}
 	}
 	else if (k == KEY_SPACEBAR)
 		e->k->jump_state = (!e->k->jump_state ? 1 : e->k->jump_state);

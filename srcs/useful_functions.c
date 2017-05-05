@@ -6,40 +6,11 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 05:30:32 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 06:02:12 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/05 07:43:39 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
-char		*ft_strjoin_free(char *s1, char *s2)
-{
-	int		i;
-	int		n;
-	char	*dest;
-
-	n = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	dest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (dest == NULL)
-		return (NULL);
-	while (s1[n])
-	{
-		dest[n] = s1[n];
-		n++;
-	}
-	i = 0;
-	while (s2[i])
-	{
-		dest[n] = s2[i];
-		n++;
-		i++;
-	}
-	dest[n] = '\0';
-	free(s1);
-	return (dest);
-}
 
 t_intp		int_to_intp(int x, int y)
 {
@@ -79,7 +50,7 @@ void	reprint(t_env *e)
 
 void	print_error_code(int code)
 {
-	system("afplay resources/erro.mp3 &");
+	system("afplay resources/sounds/erro.mp3 &");
 	ft_putstr("An error has occured: ");
 	ft_putnbr(code);
 	ft_putstr("   Leaving Wolf 3D ...");

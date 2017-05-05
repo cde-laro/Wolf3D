@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/03 05:35:46 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/05 07:45:46 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,22 @@ void	init_keys_value(t_env *e)
 	e->k->dec.x = 0;
 	e->k->dec.y = 50;
 	e->k->rotation = 1;
+	e->p->ammo = 12;
+	e->p->ammo_tick = 0;
 }
-/*
-void	init_skybox(t_env *e)
+
+t_map		*init_map(char *param)
 {
-	if (!(e->s = (t_sky *)malloc(sizeof(t_sky))))
-		print_error_code(6);
-	if (!(e->s->img = (t_img *)malloc(sizeof(t_img))))
-		print_error_code(7);
-	if (!(e->s->img->ptr_img = mlx_xpm_file_to_image(e->mlx,
-		"resources/sky.xpm", &e->s->a.x, &e->s->a.y)))
-		print_error_code(8);
-	if (!(e->s->img->bts = mlx_get_data_addr(e->s->img->ptr_img,
-		&(e->s->img->bpp), &(e->s->img->size_line), &(e->s->img->end))))
-		print_error_code(9);
-}*/
+	int		fd;
+
+	if (ft_strequ(param, "generator") == 1)
+		return(create_empty_map(40, 40));
+	else
+	{
+		fd = open(param, O_RDONLY);
+		return (map_extract(fd, param));
+	}
+}
 
 t_env	*init(char *name)
 {
@@ -66,12 +67,15 @@ t_env	*init(char *name)
 		print_error_code(4);
 	if (!(e->k = (t_keys *)malloc(sizeof(t_keys))))
 		print_error_code(5);
-	if (!(e->map = parse(name)))
-		exit (-1);
+	e->map = init_map(name);
+//	if (!(e->map = parse(name)))
+//	exit (-1);
 //	(void)name;
-	//create_empty_map(e, 15, 15);
+	//create_empty_map(e, 40, 40);
 	init_img(e);
 	init_keys_value(e);
+	e->pack = 1;
+	load_txt(e);
 	e->sky = init_xpm(e, "resources/sky.xpm");
 	e->gun = init_xpm(e, "resources/lel.xpm");
 	e->cross = init_xpm(e, "resources/cross.xpm");
