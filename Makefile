@@ -6,7 +6,7 @@
 #    By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 23:16:20 by cde-laro          #+#    #+#              #
-#    Updated: 2017/05/07 13:15:37 by cde-laro         ###   ########.fr        #
+#    Updated: 2017/05/08 17:26:10 by cde-laro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,15 @@ SRC_FT = main \
 		 wolf \
 		 hook \
 		 move \
-		 skybox \
 		 useful_functions \
 		 txt_display \
 		 xpm \
 		 map_builder \
 		 textures \
-		 init_txt
+		 init_txt \
+		 music \
+		 gun \
+		 check_map
 
 OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
 SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)

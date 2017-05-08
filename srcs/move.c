@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 05:05:54 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 07:19:58 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 16:32:21 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	jump_dec(t_env *e)
 		return ;
 	else if (e->k->jump_state == 1)
 	{
- 		if (e->k->jump >= JUMP_MAX)
+		if (e->k->jump >= JUMP_MAX)
 			e->k->jump_state = -1;
 		else
 			e->k->jump += 5;
@@ -54,10 +54,12 @@ void	rotate(t_env *e, int dir)
 
 void	move(t_env *e, int dir)
 {
-	if (!(e->map->data[(int)(e->p->pos.y + (dir * e->p->dir.y * e->p->speed) + 0.3 * e->p->dir.y)]
-			[(int)(e->p->pos.x + 0.3 * e->p->dir.x)]))
+	if (!(e->map->data[(int)(e->p->pos.y + (dir * e->p->dir.y * e->p->speed) +
+		0.3 * e->p->dir.y * dir)]
+			[(int)(e->p->pos.x + 0.3 * e->p->dir.x * dir)]))
 		e->p->pos.y += (e->p->dir.y * e->p->speed) * dir;
-	if (!(e->map->data[(int)(e->p->pos.y + 0.3 * e->p->dir.y)]
-			[(int)(e->p->pos.x + (dir * e->p->dir.x * e->p->speed) + 0.3 * e->p->dir.x)]))
+	if (!(e->map->data[(int)(e->p->pos.y + 0.3 * e->p->dir.y * dir)]
+			[(int)(e->p->pos.x + (dir * e->p->dir.x * e->p->speed) + 0.3 *
+			e->p->dir.x * dir)]))
 		e->p->pos.x += (e->p->dir.x * e->p->speed) * dir;
 }

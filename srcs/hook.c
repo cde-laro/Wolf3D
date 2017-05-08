@@ -6,14 +6,14 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 11:46:15 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 17:33:39 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <stdio.h>
 
-int		mouse_funct(int button,int x,int y, t_env *e)
+int		mouse_funct(int button, int x, int y, t_env *e)
 {
 	(void)x;
 	(void)y;
@@ -56,7 +56,18 @@ int		game_loop(t_env *e)
 	if (ticks % 2 == 0 && e->k->rotation)
 		e->k->dec.x--;
 	reprint(e);
-	print_ammo(e);
+	return (0);
+}
+
+int		key_press_2(int k, t_env *e)
+{
+	if (k == KEY_TAB)
+		e->ui = (e->ui == 0 ? 1 : 0);
+	else if (k == KEY_ESCAPE)
+	{
+		system("killall afplay");
+		exit(0);
+	}
 	return (0);
 }
 
@@ -73,33 +84,19 @@ int		key_press(int k, t_env *e)
 	else if (k == KEY_SHIFT_LEFT)
 		e->k->sprint = 1;
 	else if (k == KEY_T)
-	{
-		if (e->pack != 0)
-			free_txt(e);
-		e->pack = (e->pack == TXT_PACK ? 0 : e->pack + 1);
-		load_txt(e);
-	}
+		toggle_txt(e);
 	else if (k == KEY_Z)
-	{
-		e->p->crossy = 100;
-		e->k->sneak = 100;
-		reprint(e);
-	}
+		sneak(e);
 	else if (k == KEY_R)
-	{
-		if (e->p->ammo_tick == 0)
-		{
-			ft_putendl("lel");
-			system("afplay resources/sounds/reload.mp3 &");
-			e->p->ammo_tick = 40;
-		}
-	}
+		reload(e);
+	else if (k == KEY_M)
+		switch_song(e);
 	else if (k == KEY_SPACEBAR)
 		e->k->jump_state = (!e->k->jump_state ? 1 : e->k->jump_state);
-	else if (k == KEY_R)
+	else if (k == KEY_S)
 		e->k->rotation = (e->k->rotation ? 0 : 1);
-	else if (k == KEY_ESCAPE)
-		exit(0);
+	else
+		key_press_2(k, e);
 	return (0);
 }
 

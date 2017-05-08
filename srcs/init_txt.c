@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 03:28:30 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 11:33:57 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 16:25:07 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ void	load_txt(t_env *e)
 		e->txt->txt_7 = init_xpm(e, "resources/textures/txt2/t7.xpm");
 		e->txt->txt_8 = init_xpm(e, "resources/textures/txt2/t8.xpm");
 		e->txt->txt_9 = init_xpm(e, "resources/textures/txt2/t9.xpm");
-
 	}
 	load_txt_1(e);
 }

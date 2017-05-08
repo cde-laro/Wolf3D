@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 11:15:59 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 17:27:26 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # define DEF_SPEED 0.3
 # define DEF_AMMO 12
 # define JUMP_MAX 50
-# define TXT_PACK 3
+# define TXT_PACK 4
+# define CS "Current song :"
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -45,7 +46,6 @@ typedef struct	s_intp
 	int			x;
 	int			y;
 }				t_intp;
-
 
 typedef struct	s_map
 {
@@ -145,12 +145,14 @@ typedef struct	s_env
 	int			colors;
 	t_intp		a;
 	t_intp		b;
+	int			music;
+	int			ui;
 }				t_env;
 
 t_map			*create_empty_map(int x, int y);
 int				key_press(int k, t_env *e);
 int				key_release(int k, t_env *e);
-int				mouse_funct(int button,int x,int y, t_env *e);
+int				mouse_funct(int button, int x, int y, t_env *e);
 t_env			*init(char *name);
 void			draw_line(t_env *e, t_intp a, t_intp b, int z);
 void			start(t_env *e);
@@ -163,10 +165,10 @@ int				game_loop(t_env *e);
 void			jump_dec(t_env *e);
 int				red_cross(int key, t_env *e);
 void			pix_put_img(t_env *e, int x, int y, int color);
-void 			reprint(t_env *e);
+void			reprint(t_env *e);
 int				set_color(int side, int stepx, int stepy);
 void			print_error_code(int code);
-void 			print_instruction(int generator);
+void			print_instruction(int generator);
 void			print_map(t_env *e, int **data, int maxx, int maxy);
 t_xpm			*init_xpm(t_env *e, char *path);
 void			mlx_paste_img(t_env *e, t_xpm *xpm, t_intp coord, int sky);
@@ -178,9 +180,17 @@ int				check_file2(char **str1, int *l, int *a);
 int				check_file(int *l, int *a, int fd);
 int				ft_isfullnum(char *str);
 int				ft_count_s(char *str);
-void 			load_txt(t_env *e);
+void			load_txt(t_env *e);
 t_xpm			*get_xpm(t_env *e, int id);
 void			print_ammo(t_env *e);
 void			free_txt(t_env *e);
+void			print_music_name(t_env *e);
+void			print_texture_name(t_env *e);
+void			switch_song(t_env *e);
+void			toggle_txt(t_env *e);
+void			reload(t_env *e);
+void			sneak(t_env *e);
+void			init_all_xpm(t_env *e);
+char			*ft_strjoin_free(char *s1, char *s2);
 
 #endif
