@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 07:58:44 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 11:46:15 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int		mouse_funct(int button,int x,int y, t_env *e)
 
 int		game_loop(t_env *e)
 {
-	print_map(e, e->map->data, e->map->maxx, e->map->maxy);
 	static int	ticks = 0;
 
 	e->p->speed = (e->k->sprint ? DEF_SPEED * 2 : DEF_SPEED);
@@ -50,7 +49,6 @@ int		game_loop(t_env *e)
 		move(e, -1);
 	jump_dec(e);
 	e->p->ammo_tick -= (e->p->ammo_tick == 0 ? 0 : 1);
-	printf("Ammo = %d, ammo-tick = %d\n", e->p->ammo, e->p->ammo_tick);
 	e->p->ammo = (e->p->ammo_tick == 1 ? DEF_AMMO : e->p->ammo);
 	ticks++;
 	if (!e->k->sneak)
@@ -58,6 +56,7 @@ int		game_loop(t_env *e)
 	if (ticks % 2 == 0 && e->k->rotation)
 		e->k->dec.x--;
 	reprint(e);
+	print_ammo(e);
 	return (0);
 }
 
@@ -74,7 +73,12 @@ int		key_press(int k, t_env *e)
 	else if (k == KEY_SHIFT_LEFT)
 		e->k->sprint = 1;
 	else if (k == KEY_T)
+	{
+		if (e->pack != 0)
+			free_txt(e);
 		e->pack = (e->pack == TXT_PACK ? 0 : e->pack + 1);
+		load_txt(e);
+	}
 	else if (k == KEY_Z)
 	{
 		e->p->crossy = 100;

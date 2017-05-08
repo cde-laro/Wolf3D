@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 03:28:30 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 06:17:12 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 11:33:57 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void	load_txt_1(t_env *e)
 
 void	load_txt(t_env *e)
 {
-	e->txt = (t_txt *)malloc(sizeof(t_txt));
 	if (e->pack == 1)
 	{
 		e->txt->txt_1 = init_xpm(e, "resources/textures/txt1/t1.xpm");

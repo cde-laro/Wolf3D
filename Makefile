@@ -6,7 +6,7 @@
 #    By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 23:16:20 by cde-laro          #+#    #+#              #
-#    Updated: 2017/05/05 06:15:16 by cde-laro         ###   ########.fr        #
+#    Updated: 2017/05/07 13:15:37 by cde-laro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME): $(OBJ_DIR) $(SRC)
 	@$(MAKE) $(OBJ)
-	@echo "$(COLOR)Objects of $(NAME)\t\t\0033[0;32m[Created]\0033[0;37m"
+	@echo "$(COLOR)Objects of $(NAME)\t\0033[0;32m[Created]\0033[0;37m"
 	@make -j -C $(LIB_DIR)
 	@afplay resources/compile.mp3 &
 	@make -j -C $(MLX_DIR)
@@ -65,7 +65,7 @@ clean:
 	@rm -rf $(OBJ_DIR)
 	@make clean -C $(LIB_DIR)
 	@make clean -C $(MLX_DIR)
-	@echo "$(COLOR)Objects of $(NAME)\t\t\0033[0;31m[Deleted]\0033[0;37m"
+	@echo "$(COLOR)Objects of $(NAME)\t\0033[0;31m[Deleted]\0033[0;37m"
 
 fclean: clean
 	@rm -f $(NAME)

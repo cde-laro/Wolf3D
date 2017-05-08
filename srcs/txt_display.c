@@ -6,12 +6,27 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 01:39:40 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 02:35:21 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 10:15:02 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
+void	print_ammo(t_env *e)
+{
+	char	*ammo;
+
+	ammo = ft_itoa(e->p->ammo);
+	if (e->p->ammo_tick != 0)
+		mlx_string_put (e->mlx, e->win, 10, WIN_Y - 50, RED, "RELOADING");
+	else
+	{
+		mlx_string_put (e->mlx, e->win, 10, WIN_Y - 50, (e->p->ammo == 0 ? RED :
+			WHITE), ammo);
+		free(ammo);
+	}
+
+}
 
 void	print_instruction_generator(void)
 {

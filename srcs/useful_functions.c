@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 05:30:32 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 07:43:39 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 11:48:17 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,28 @@ t_intp		int_to_intp(int x, int y)
 	a.x = x;
 	a.y = y;
 	return(a);
+}
+
+void	free_txt(t_env *e)
+{
+	mlx_destroy_image(e->mlx, e->txt->txt_1->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_2->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_3->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_4->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_5->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_6->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_7->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_8->img);
+	mlx_destroy_image(e->mlx, e->txt->txt_9->img);
+	free(e->txt->txt_1);
+	free(e->txt->txt_2);
+	free(e->txt->txt_3);
+	free(e->txt->txt_4);
+	free(e->txt->txt_5);
+	free(e->txt->txt_6);
+	free(e->txt->txt_7);
+	free(e->txt->txt_8);
+	free(e->txt->txt_9);
 }
 
 int		set_color(int side, int stepx, int stepy)

@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 07:14:34 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 10:56:21 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	calc_line_len(t_env *e, int x, int side, int hit)
 
 void	find_wall(t_env *e, int hit, int x, int side)
 {
-	//hit = (e->map->data[(int)e->p->map.y][(int)e->p->map.x] > 0 ? 1 : 0);
 	while (hit == 0)
 	{
 		if (e->p->sided.x < e->p->sided.y)
@@ -139,8 +138,6 @@ void	draw_frame(t_env *e)
 
 void	start(t_env *e)
 {
-
-	e->p = (t_player *)malloc(sizeof(t_player));
 	if (e->map->data[e->map->maxy / 2][e->map->maxx / 2])
 	{
 		ft_putendl("The center must be empty");
@@ -152,8 +149,9 @@ void	start(t_env *e)
 	e->p->dir.y = 0;
 	e->p->plane.x = 0;
 	e->p->plane.y = 0.66;
-	e->p->speed = 0.3;
+	e->p->speed = DEF_SPEED;
 	e->p->r_s = 0.1;
 	e->p->crossy = 40;
 	e->p->ammo = DEF_AMMO;
+	e->p->ammo_tick = 0;
 }

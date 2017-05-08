@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 07:37:55 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 11:15:59 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define DEF_SPEED 0.3
 # define DEF_AMMO 12
 # define JUMP_MAX 50
-# define TXT_PACK 1
+# define TXT_PACK 3
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -180,5 +180,7 @@ int				ft_isfullnum(char *str);
 int				ft_count_s(char *str);
 void 			load_txt(t_env *e);
 t_xpm			*get_xpm(t_env *e, int id);
+void			print_ammo(t_env *e);
+void			free_txt(t_env *e);
 
 #endif

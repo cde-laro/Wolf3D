@@ -1,16 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extractv2.c                                        :+:      :+:    :+:   */
+/*   extract.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 01:55:34 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 02:23:50 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 10:29:13 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+char		*ft_strjoin_free(char *s1, char *s2)
+{
+	int		i;
+	int		n;
+	char	*dest;
+
+	n = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	dest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (dest == NULL)
+		return (NULL);
+	while (s1[n])
+	{
+		dest[n] = s1[n];
+		n++;
+	}
+	i = 0;
+	while (s2[i])
+	{
+		dest[n] = s2[i];
+		n++;
+		i++;
+	}
+	dest[n] = s2[i];
+	free(s1);
+	free(s2);
+	return (dest);
+}
 
 int		ft_count_s(char *str)
 {
@@ -53,10 +83,8 @@ int		ft_isfullnum(char *str)
 int		check_file(int *l, int *a, int fd)
 {
 	char	*str1;
-	char	*tmp;
 	char	*buf;
 
-	tmp = NULL;
 	if (!(str1 = (char *)malloc(sizeof(char) * 11)))
 		return (-1);
 	if (!(buf = (char *)malloc(sizeof(char) * 10001)))
@@ -65,15 +93,8 @@ int		check_file(int *l, int *a, int fd)
 	ft_memset(str1, '\0', 11);
 	while (read(fd, buf, 10000) > 0)
 	{
-		tmp = str1;
-		if (!(str1 = ft_strjoin(str1, buf)))
-		{
-			ft_strdel(&tmp);
-			ft_strdel(&buf);
+		if (!(str1 = ft_strjoin_free(str1, buf)))
 			return (-1);
-		}
-		ft_strdel(&tmp);
-		ft_memset(buf, '\0', 10001);
 	}
 	return (check_file2(&str1, l, a));
 }
@@ -136,11 +157,9 @@ t_map	*map_extract(int fd, char *filename)
 
 char	*extracting(int fd)
 {
-	char	*tmp;
 	char	*str;
 	char	*buf;
 
-	tmp = NULL;
 	if (!(str = (char *)malloc(sizeof(char) * 11)))
 		return (NULL);
 	if (!(buf = (char *)malloc(sizeof(char) * 10001)))
@@ -149,14 +168,8 @@ char	*extracting(int fd)
 	ft_memset(str, '\0', 11);
 	while (read(fd, buf, 10000) > 0)
 	{
-		tmp = str;
-		if (!(str = ft_strjoin(str, buf)))
-		{
-			ft_strdel(&tmp);
+		if (!(str = ft_strjoin_free(str, buf)))
 			return (NULL);
-		}
-		ft_strdel(&tmp);
-		ft_memset(buf, '\0', 10000);
 	}
 	return (str);
 }

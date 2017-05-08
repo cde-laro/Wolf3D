@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/05 07:45:46 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/08 11:33:50 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	init_keys_value(t_env *e)
 	e->k->dec.x = 0;
 	e->k->dec.y = 50;
 	e->k->rotation = 1;
-	e->p->ammo = 12;
-	e->p->ammo_tick = 0;
 }
 
 t_map		*init_map(char *param)
@@ -74,7 +72,8 @@ t_env	*init(char *name)
 	//create_empty_map(e, 40, 40);
 	init_img(e);
 	init_keys_value(e);
-	e->pack = 1;
+	e->pack = 0;
+	e->txt = (t_txt *)malloc(sizeof(t_txt));
 	load_txt(e);
 	e->sky = init_xpm(e, "resources/sky.xpm");
 	e->gun = init_xpm(e, "resources/lel.xpm");
