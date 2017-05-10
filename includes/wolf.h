@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:27:26 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:41:12 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@
 # define DEF_SPEED 0.3
 # define DEF_AMMO 12
 # define JUMP_MAX 50
-# define TXT_PACK 4
-# define CS "Current song :"
+# define TXT_PACK 5
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -145,6 +144,7 @@ typedef struct	s_env
 	int			colors;
 	t_intp		a;
 	t_intp		b;
+	int			floor_color;
 	int			music;
 	int			ui;
 }				t_env;
@@ -168,12 +168,12 @@ void			pix_put_img(t_env *e, int x, int y, int color);
 void			reprint(t_env *e);
 int				set_color(int side, int stepx, int stepy);
 void			print_error_code(int code);
-void			print_instruction(int generator);
+void			print_instruction();
 void			print_map(t_env *e, int **data, int maxx, int maxy);
 t_xpm			*init_xpm(t_env *e, char *path);
 void			mlx_paste_img(t_env *e, t_xpm *xpm, t_intp coord, int sky);
 void			mlx_img_copy(t_env *e, t_intp coord, t_intp dec, t_xpm *src);
-int				**put_in_map(int **map, int fd);
+int				**put_in_map(int **map, int fd, int maxx, int maxy);
 char			*extracting(int fd);
 t_map			*map_extract(int fd, char *filename);
 int				check_file2(char **str1, int *l, int *a);
@@ -192,5 +192,7 @@ void			reload(t_env *e);
 void			sneak(t_env *e);
 void			init_all_xpm(t_env *e);
 char			*ft_strjoin_free(char *s1, char *s2);
+int				check_map(char *str);
+void 			floor_color(t_env *e);
 
 #endif

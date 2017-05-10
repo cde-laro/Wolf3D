@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 06:11:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:01:04 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:15:03 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ t_xpm	*get_xpm(t_env *e, int id)
 		return (e->txt->txt_9);
 	else
 		return (e->txt->txt_1);
+}
+
+void 	floor_color(t_env *e)
+{
+	if (e->floor_color == GREY)
+		e->floor_color = RAW_RED;
+	else if (e->floor_color == RAW_RED)
+		e->floor_color = RAW_BLUE;
+	else if (e->floor_color == RAW_BLUE)
+		e->floor_color = WHITE;
+	else if (e->floor_color == WHITE)
+		e->floor_color = BLACK;
+	else if (e->floor_color == BLACK)
+		e->floor_color = GREY;
+
 }
 
 void	toggle_txt(t_env *e)

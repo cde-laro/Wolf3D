@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:24:19 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:41:25 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_keys_value(t_env *e)
 	e->k->rotation = 1;
 	e->music = 0;
 	e->ui = 1;
-	e->pack = 0;
+	e->pack = 1;
 }
 
 void	start(t_env *e)
@@ -47,8 +47,8 @@ void	start(t_env *e)
 		ft_putendl("The center must be empty");
 		exit(-1);
 	}
-	e->p->pos.x = e->map->maxx / 2;
-	e->p->pos.y = e->map->maxy / 2;
+	e->p->pos.x = e->map->maxx / 2 + 0.5;
+	e->p->pos.y = e->map->maxy / 2 + 0.5;
 	e->p->dir.x = -0.5;
 	e->p->dir.y = 0;
 	e->p->plane.x = 0;
@@ -58,6 +58,7 @@ void	start(t_env *e)
 	e->p->crossy = 40;
 	e->p->ammo = DEF_AMMO;
 	e->p->ammo_tick = 0;
+	e->floor_color = GREY;
 }
 
 t_map	*init_map(char *param)
@@ -68,7 +69,8 @@ t_map	*init_map(char *param)
 		return (create_empty_map(40, 40));
 	else
 	{
-		fd = open(param, O_RDONLY);
+		if ((fd = open(param, O_RDONLY)) == -1)
+			print_error_code(42);
 		return (map_extract(fd, param));
 	}
 }

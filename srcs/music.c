@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:37:42 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:00:08 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 16:32:34 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ void	switch_song(t_env *e)
 	e->music = (e->music == 9 ? 0 : e->music + 1);
 	system("killall afplay");
 	if (e->music == 1)
-		system("afplay resources/sounds/music1.mp3 &");
+		system("afplay resources/sounds/music1.mp3 -v 0.3 &");
 	else if (e->music == 2)
-		system("afplay resources/sounds/music2.mp3 &");
+		system("afplay resources/sounds/music2.mp3 -v 0.3 &");
 	else if (e->music == 3)
-		system("afplay resources/sounds/music3.mp3 &");
+		system("afplay resources/sounds/music3.mp3 -v 0.3 &");
 	else if (e->music == 4)
-		system("afplay resources/sounds/music4.mp3 &");
+		system("afplay resources/sounds/music4.mp3 -v 0.3 &");
 	else if (e->music == 5)
-		system("afplay resources/sounds/music5.mp3 &");
+		system("afplay resources/sounds/music5.mp3 -v 0.3 &");
 	else if (e->music == 6)
-		system("afplay resources/sounds/music6.mp3 &");
+		system("afplay resources/sounds/music6.mp3 -v 0.3 &");
 	else if (e->music == 7)
-		system("afplay resources/sounds/music7.mp3 &");
+		system("afplay resources/sounds/music7.mp3 -v 0.3 &");
 	else if (e->music == 8)
-		system("afplay resources/sounds/music8.mp3 &");
+		system("afplay resources/sounds/music8.mp3 -v 0.3 &");
 }
 
 void	print_music_name(t_env *e)

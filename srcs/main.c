@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 02:09:26 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 16:49:45 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:24:49 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		main(int ac, char **av)
 	e = init(av[1]);
 	e->generator = ft_strequ(av[0], "generator");
 	start(e);
-	print_instruction(e->generator);
+	print_instruction();
 	mlx_loop(e->mlx);
 	return (0);
 }

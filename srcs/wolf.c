@@ -6,14 +6,14 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:24:31 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:18:35 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include <stdio.h>
 
-void	mlx_textur(t_env *e, int x, int line, int hit)
+void	mlx_text_to_wall(t_env *e, int x, int line, int hit)
 {
 	int		y;
 	t_intp	text;
@@ -53,12 +53,12 @@ void	calc_line_len(t_env *e, int x, int side, int hit)
 		if (e->a.y < e->b.y && e->a.y > 0)
 		{
 			if (e->pack)
-				mlx_textur(e, x, e->p->line_h, hit);
+				mlx_text_to_wall(e, x, e->p->line_h, hit);
 			else
 				pix_put_img(e, x, e->a.y, e->colors);
 		}
 		else
-			pix_put_img(e, x, e->a.y, GREY);
+			pix_put_img(e, x, e->a.y, e->floor_color);
 		e->a.y += 1;
 	}
 }

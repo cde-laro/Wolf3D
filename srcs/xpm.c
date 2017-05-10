@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 23:03:35 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:23:32 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:25:57 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_all_xpm(t_env *e)
 {
 	e->txt = (t_txt *)malloc(sizeof(t_txt));
 	load_txt(e);
-	e->sky = init_xpm(e, "resources/sky.xpm");
-	e->gun = init_xpm(e, "resources/lel.xpm");
-	e->cross = init_xpm(e, "resources/cross.xpm");
+	e->sky = init_xpm(e, "resources/img/sky.xpm");
+	e->gun = init_xpm(e, "resources/img/gun.xpm");
+	e->cross = init_xpm(e, "resources/img/cross.xpm");
 }

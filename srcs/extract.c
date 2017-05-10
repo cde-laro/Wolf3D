@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 01:55:34 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:25:45 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 15:55:18 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		check_file2(char **str1, int *l, int *a)
 		else
 		{
 			if (*a != ft_count_s(map[i]))
-				return (-1);
+				print_error_code(25);
 		}
 		if (ft_isfullnum(map[i]) == -1)
 			return (-1);
@@ -89,7 +89,7 @@ t_map	*map_extract(int fd, char *filename)
 	m->maxx = a;
 	close(fd);
 	fd = open(filename, O_RDONLY);
-	if (!(m->data = put_in_map(m->data, fd)))
+	if (!(m->data = put_in_map(m->data, fd, m->maxx, m->maxy)))
 		return (NULL);
 	return (m);
 }
@@ -98,22 +98,30 @@ char	*extracting(int fd)
 {
 	char	*str;
 	char	*buf;
+	int		ret;
 
 	if (!(str = (char *)malloc(sizeof(char) * 11)))
-		return (NULL);
+		print_error_code(33);
 	if (!(buf = (char *)malloc(sizeof(char) * 10001)))
-		return (NULL);
-	ft_memset(buf, '\0', 10001);
+		print_error_code(34);
+	ft_memset(buf, '\0', 10);
 	ft_memset(str, '\0', 11);
-	while (read(fd, buf, 10000) > 0)
+	while ((ret = read(fd, buf, 10000)) > 0)
 	{
+		if (ft_isfullnum(buf) == -1)
+			print_error_code(43);
 		if (!(str = ft_strjoin_free(str, buf)))
-			return (NULL);
+			print_error_code(35);
 	}
+
+	if (ret == -1)
+		print_error_code(41);
+	if (check_map(str) == -1)
+		print_error_code(43);
 	return (str);
 }
 
-int		**put_in_map(int **map, int fd)
+int		**put_in_map(int **map, int fd, int maxx, int maxy)
 {
 	int		n;
 	int		s;
@@ -123,19 +131,19 @@ int		**put_in_map(int **map, int fd)
 	n = 0;
 	i = 0;
 	s = 0;
-	if (!(str = extracting(fd)))
-		return (NULL);
+	str = extracting(fd);
 	while (str[i])
 	{
-		if (str[i] == '-' || (str[i] >= '0' && str[i] <= '9'))
+		if (str[i] >= '0' && str[i] <= '9')
 		{
-			map[n][s++] = ft_atoi(&str[i]);
-			while (str[i] && (str[i] == '-'
-				|| (str[i] >= '0' && str[i] <= '9')))
+			map[n][s] = ft_atoi(&str[i]);
+			while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 				i++;
 		}
+		if ((!n || n == maxy - 1 || !s || s == maxx - 1) && map[n][s] == 0)
+			map[n][s] = 1;
 		n += (str[i] && str[i] == '\n' ? 1 : 0);
-		s = (str[i] && str[i++] == '\n' ? 0 : s);
+		s = (str[i] && str[i++] == '\n' ? 0 : s + 1);
 		i += (str[i] && str[i] == ' ' ? 1 : 0);
 	}
 	free(str);

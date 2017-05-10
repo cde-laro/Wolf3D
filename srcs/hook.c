@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:33:39 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:16:31 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		game_loop(t_env *e)
 	ticks++;
 	if (!e->k->sneak)
 		e->p->crossy *= 0.9999;
-	if (ticks % 2 == 0 && e->k->rotation)
+	if (ticks % 4 == 0 && e->k->rotation)
 		e->k->dec.x--;
 	reprint(e);
 	return (0);
@@ -63,6 +63,8 @@ int		key_press_2(int k, t_env *e)
 {
 	if (k == KEY_TAB)
 		e->ui = (e->ui == 0 ? 1 : 0);
+	else if (k == KEY_F)
+		floor_color(e);
 	else if (k == KEY_ESCAPE)
 	{
 		system("killall afplay");
