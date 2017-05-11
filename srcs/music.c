@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:37:42 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 16:32:34 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 11:18:29 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,20 @@ void	print_texture_name(t_env *e)
 	else if (e->pack == 4)
 		mlx_string_put(e->mlx, e->win, WIN_X - 550, 35, WHITE,
 			"Don't know why i made this");
+}
+
+void	 load_songs(void)
+{
+	ft_putendl("Loading songs");
+	system("afplay resources/sounds/music1.mp3 -v 0 &");
+	system("afplay resources/sounds/music2.mp3 -v 0 &");
+	system("afplay resources/sounds/music3.mp3 -v 0 &");
+	system("afplay resources/sounds/music4.mp3 -v 0 &");
+	system("afplay resources/sounds/music5.mp3 -v 0 &");
+	system("afplay resources/sounds/music6.mp3 -v 0 &");
+	system("afplay resources/sounds/music7.mp3 -v 0 &");
+	system("afplay resources/sounds/music8.mp3 -v 0 &");
+	system("afplay resources/sounds/erro.mp3 -v 0 &");
+	system("afplay resources/sounds/empty.mp3 -v 0 &");
+	system("afplay resources/sounds/fire.mp3 -v 0 &");
 }

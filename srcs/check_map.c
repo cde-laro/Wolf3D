@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 17:25:10 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 17:26:33 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:09:31 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		check_map(char *str)
 	i = 0;
 	while (str[i])
 	{
-		ft_putchar(str[i]);
 		if (str[i] != ' ' && !ft_isdigit(str[i]) && str[i] != '\n')
 			return (-1);
 		i++;
@@ -38,7 +37,7 @@ int		ft_count_s(char *str)
 		i++;
 	while (str[i])
 	{
-		if (str[i] == ' ' && str[i + 1] != ' ' && str[i + 1] != '\n')
+		if (str[i] == ' ' && str[i + 1] != ' ' && str[i + 1] != '\n' )
 			s++;
 		i++;
 	}
@@ -78,7 +77,12 @@ int		check_file(int *l, int *a, int fd)
 			print_error_code(36);
 		if (!(str1 = ft_strjoin_free(str1, buf)))
 			print_error_code(37);
+		if (!(buf = (char *)malloc(sizeof(char) * 10001)))
+			return (-1);
+		ft_memset(buf, '\0', 10001);
 	}
+	ft_putendl(str1);
+	free(buf);
 	if (ret == -1 || ft_strlen(str1) < 10)
 		print_error_code(38);
 	return (check_file2(&str1, l, a));

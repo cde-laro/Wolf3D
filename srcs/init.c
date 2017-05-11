@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 17:41:25 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 11:18:13 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	start(t_env *e)
 		ft_putendl("The center must be empty");
 		exit(-1);
 	}
+	load_songs();
 	e->p->pos.x = e->map->maxx / 2 + 0.5;
 	e->p->pos.y = e->map->maxy / 2 + 0.5;
 	e->p->dir.x = -0.5;

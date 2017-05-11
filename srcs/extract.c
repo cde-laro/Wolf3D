@@ -6,11 +6,12 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 01:55:34 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 15:55:18 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:11:16 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+#include <stdio.h>
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
@@ -33,8 +34,8 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	while (s2[i])
 		dest[n++] = s2[i++];
 	dest[n] = s2[i];
-	free(s1);
 	free(s2);
+	free(s1);
 	return (dest);
 }
 
@@ -52,7 +53,10 @@ int		check_file2(char **str1, int *l, int *a)
 		else
 		{
 			if (*a != ft_count_s(map[i]))
+			{
+				printf("%d, %d, %i\n", *a, ft_count_s(map[i]), i);
 				print_error_code(25);
+			}
 		}
 		if (ft_isfullnum(map[i]) == -1)
 			return (-1);
@@ -104,7 +108,7 @@ char	*extracting(int fd)
 		print_error_code(33);
 	if (!(buf = (char *)malloc(sizeof(char) * 10001)))
 		print_error_code(34);
-	ft_memset(buf, '\0', 10);
+	ft_memset(buf, '\0', 10001);
 	ft_memset(str, '\0', 11);
 	while ((ret = read(fd, buf, 10000)) > 0)
 	{
@@ -112,10 +116,15 @@ char	*extracting(int fd)
 			print_error_code(43);
 		if (!(str = ft_strjoin_free(str, buf)))
 			print_error_code(35);
+		if (!(buf = (char *)malloc(sizeof(char) * 10001)))
+			print_error_code(34);
+		ft_memset(buf, '\0', 10001);
 	}
-
+	free(buf);
 	if (ret == -1)
 		print_error_code(41);
+	ft_putendl(str);
+	ft_putendl("JPP LOL");
 	if (check_map(str) == -1)
 		print_error_code(43);
 	return (str);

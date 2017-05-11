@@ -6,7 +6,7 @@
 #    By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/01 23:16:20 by cde-laro          #+#    #+#              #
-#    Updated: 2017/05/08 17:26:10 by cde-laro         ###   ########.fr        #
+#    Updated: 2017/05/11 11:15:58 by cde-laro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(NAME): $(OBJ_DIR) $(SRC)
 	@$(MAKE) $(OBJ)
 	@echo "$(COLOR)Objects of $(NAME)\t\0033[0;32m[Created]\0033[0;37m"
 	@make -j -C $(LIB_DIR)
-	@afplay resources/compile.mp3 &
+	@afplay resources/sounds/compile.mp3 &
 	@make -j -C $(MLX_DIR)
 	@$(CC) $(LIB) $(OBJ) $(MLX) -o $@
 	@echo "$(COLOR)$(NAME)\t\t\t\0033[0;32m[Created]\0033[0;37m"

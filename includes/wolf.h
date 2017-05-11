@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 17:41:12 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 11:18:01 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,6 @@ void			init_all_xpm(t_env *e);
 char			*ft_strjoin_free(char *s1, char *s2);
 int				check_map(char *str);
 void 			floor_color(t_env *e);
+void	 		load_songs(void);
 
 #endif
