@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 17:25:10 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/11 15:19:33 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 15:25:05 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		check_file(int *l, int *a, int fd)
 			return (-1);
 		ft_memset(buf, '\0', 10001);
 	}
-	(str1[0] == '\n') ?	print_error_code(67) : 0;
+	(str1[0] == '\n') ? print_error_code(67) : 0;
 	free(buf);
 	if (ret == -1 || ft_strlen(str1) < 10)
 		print_error_code(38);
