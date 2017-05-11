@@ -6,12 +6,11 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 20:50:04 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 17:18:35 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:48:02 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-#include <stdio.h>
 
 void	mlx_text_to_wall(t_env *e, int x, int line, int hit)
 {

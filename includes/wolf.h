@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 14:18:43 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/11 11:18:01 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:44:07 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define DEF_SPEED 0.3
 # define DEF_AMMO 12
 # define JUMP_MAX 50
-# define TXT_PACK 5
+# define TXT_PACK 4
 # define SQ(x) (x * x)
 
 typedef struct	s_point
@@ -193,7 +193,7 @@ void			sneak(t_env *e);
 void			init_all_xpm(t_env *e);
 char			*ft_strjoin_free(char *s1, char *s2);
 int				check_map(char *str);
-void 			floor_color(t_env *e);
-void	 		load_songs(void);
+void			floor_color(t_env *e);
+void			load_songs(void);
 
 #endif

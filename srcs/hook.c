@@ -6,12 +6,11 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 04:33:36 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 17:16:31 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:47:49 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-#include <stdio.h>
 
 int		mouse_funct(int button, int x, int y, t_env *e)
 {

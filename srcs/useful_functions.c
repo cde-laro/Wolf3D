@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 05:30:32 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/08 17:45:09 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:43:22 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	reprint(t_env *e)
 		mlx_put_image_to_window(e->mlx, e->win, e->gun->img->ptr_img, WIN_X / 2
 			+ 100, WIN_Y - e->gun->a.y);
 		mlx_put_image_to_window(e->mlx, e->win, e->cross->img->ptr_img,
-			WIN_X / 2 +	e->cross->a.x / 2, WIN_Y / 2 + e->cross->a.y / 2 -
+			WIN_X / 2 + e->cross->a.x / 2, WIN_Y / 2 + e->cross->a.y / 2 -
 			e->p->crossy);
 	}
 	if (e->ui)

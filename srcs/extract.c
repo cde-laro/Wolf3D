@@ -6,12 +6,11 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 01:55:34 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/11 14:11:16 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:47:42 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-#include <stdio.h>
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
@@ -54,7 +53,6 @@ int		check_file2(char **str1, int *l, int *a)
 		{
 			if (*a != ft_count_s(map[i]))
 			{
-				printf("%d, %d, %i\n", *a, ft_count_s(map[i]), i);
 				print_error_code(25);
 			}
 		}
@@ -121,12 +119,8 @@ char	*extracting(int fd)
 		ft_memset(buf, '\0', 10001);
 	}
 	free(buf);
-	if (ret == -1)
+	if (ret == -1 || check_map(str) == -1)
 		print_error_code(41);
-	ft_putendl(str);
-	ft_putendl("JPP LOL");
-	if (check_map(str) == -1)
-		print_error_code(43);
 	return (str);
 }
 

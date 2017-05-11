@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 17:25:10 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/11 14:09:31 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 15:19:33 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int		check_map(char *str)
 	while (str[i])
 	{
 		if (str[i] != ' ' && !ft_isdigit(str[i]) && str[i] != '\n')
-			return (-1);
+			print_error_code(51);
+		if (str[i] == '\n' && str[i + 1] == '\n')
+			print_error_code(52);
 		i++;
 	}
 	return (0);
@@ -37,7 +39,9 @@ int		ft_count_s(char *str)
 		i++;
 	while (str[i])
 	{
-		if (str[i] == ' ' && str[i + 1] != ' ' && str[i + 1] != '\n' )
+		if (str[i] == ' ' && str[i + 1] == ' ')
+			print_error_code(66);
+		if (str[i] == ' ' && str[i + 1] != '\n')
 			s++;
 		i++;
 	}
@@ -52,7 +56,7 @@ int		ft_isfullnum(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ' ' &&	str[i] != '\n')
+		if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '\n')
 			return (-1);
 		i++;
 	}
@@ -81,7 +85,7 @@ int		check_file(int *l, int *a, int fd)
 			return (-1);
 		ft_memset(buf, '\0', 10001);
 	}
-	ft_putendl(str1);
+	(str1[0] == '\n') ?	print_error_code(67) : 0;
 	free(buf);
 	if (ret == -1 || ft_strlen(str1) < 10)
 		print_error_code(38);

@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:37:42 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/11 11:18:29 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:42:45 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	print_texture_name(t_env *e)
 			"Don't know why i made this");
 }
 
-void	 load_songs(void)
+void	load_songs(void)
 {
 	ft_putendl("Loading songs");
 	system("afplay resources/sounds/music1.mp3 -v 0 &");

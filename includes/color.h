@@ -6,7 +6,7 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 07:05:40 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/10 12:42:54 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:43:39 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,5 @@
 # define GREY 0x00A2B5BF
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
-
-
-
 
 #endif

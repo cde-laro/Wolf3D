@@ -6,12 +6,11 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 04:27:31 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/01 22:48:54 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:48:09 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-#include <stdio.h>
 
 void		pix_put_img(t_env *e, int x, int y, int color)
 {

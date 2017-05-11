@@ -6,12 +6,11 @@
 /*   By: cde-laro <cde-laro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 03:11:12 by cde-laro          #+#    #+#             */
-/*   Updated: 2017/05/11 11:18:13 by cde-laro         ###   ########.fr       */
+/*   Updated: 2017/05/11 14:47:54 by cde-laro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-#include <stdio.h>
 
 void	init_img(t_env *e)
 {
